@@ -24,3 +24,11 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/welcome', function () {
     return view('auth.welcome-after');
 })->middleware('auth')->name('welcome');
+
+Route::get('/tentang', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/kontak', function () {
+    return view('contact');
+})->name('contact');
