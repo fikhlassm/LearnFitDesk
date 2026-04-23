@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 
-// Landing page
+// Landing page (halaman utama sebelum login)
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -19,3 +19,8 @@ Route::post('/login', [LoginController::class, 'login']);
 
 // Logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Welcome page setelah login/register berhasil
+Route::get('/welcome', function () {
+    return view('auth.welcome-after');
+})->middleware('auth')->name('welcome');

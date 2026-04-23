@@ -8,11 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    protected $redirectTo = '/welcome';
+
     public function showForm()
     {
-        if (Auth::check()) {
-            return redirect('/');
-        }
         return view('auth.login');
     }
 
@@ -32,12 +31,12 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Selamat datang kembali!');
+            return redirect()->route('welcome');
         }
 
-        return back()
-            ->withInput($request->only('email'))
-            ->withErrors(['email' => 'Email atau kata sandi salah.']);
+        return back()->withErrors([
+            'email' => 'Email atau kata sandi salah.',
+        ])->withInput($request->only('email'));
     }
 
     public function logout(Request $request)
@@ -45,6 +44,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect()->route('home');
     }
 }

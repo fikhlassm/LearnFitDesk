@@ -1,4 +1,4 @@
-@extends('layouts.app')
+    `   `@extends('layouts.app')
 
 @section('content')
 
@@ -20,7 +20,7 @@
             <li><a href="#kontak" class="navbar__link">Kontak</a></li>
         </ul>
 
-        <div class="navbar__actions">
+        <div class="navbar__actions"> 
             <a href="/login" class="btn btn--ghost">Masuk</a>
             <a href="/register" class="btn btn--primary">Daftar</a>
         </div>
