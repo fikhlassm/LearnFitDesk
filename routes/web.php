@@ -25,6 +25,11 @@ Route::get('/welcome', function () {
     return view('auth.welcome-after');
 })->middleware('auth')->name('welcome');
 
+// Dashboard Pengajar
+Route::get('/dashboard/pengajar', function () {
+    return view('dashboard.pengajar');
+})->middleware('auth')->name('dashboard.pengajar');
+
 Route::get('/tentang', function () {
     return view('about');
 })->name('about');

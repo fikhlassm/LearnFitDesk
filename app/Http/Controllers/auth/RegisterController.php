@@ -46,6 +46,9 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
+        if ($user->role === 'pengajar') {
+            return redirect()->route('dashboard.pengajar');
+        }
         return redirect()->route('welcome');
     }
 }

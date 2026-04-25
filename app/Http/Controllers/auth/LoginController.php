@@ -31,6 +31,9 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
+            if (Auth::user()->role === 'pengajar') {
+                return redirect()->route('dashboard.pengajar');
+            }
             return redirect()->route('welcome');
         }
 

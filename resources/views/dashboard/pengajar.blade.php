@@ -1,0 +1,521 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="dash-page">
+
+    {{-- SIDEBAR --}}
+    <aside class="sidebar">
+        <div class="sidebar__brand">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <rect width="28" height="28" rx="8" fill="#2563EB"/>
+                <path d="M8 10h12M8 14h8M8 18h10" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <p class="sidebar__brand-name">LearnFit</p>
+                <p class="sidebar__brand-sub">Platform Belajar Anda</p>
+            </div>
+        </div>
+
+        <nav class="sidebar__nav">
+            <a href="#" class="sidebar__link sidebar__link--active">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="11" y="2" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="2" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="11" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/></svg>
+                Beranda
+            </a>
+            <a href="#" class="sidebar__link">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 18c0-3.31 3.13-6 7-6s7 2.69 7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="15.5" cy="7.5" r="2.5" fill="currentColor" opacity=".3"/></svg>
+                Kelas Saya
+            </a>
+            <a href="#" class="sidebar__link">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6 1v4M14 1v4M2 8h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                Jadwal
+            </a>
+            <a href="#" class="sidebar__link">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6 8h8M6 11h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 14l1.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Tugas dan Penilaian
+            </a>
+            <a href="#" class="sidebar__link">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 18c0-3.31 3.13-6 7-6s7 2.69 7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                Profil
+            </a>
+        </nav>
+
+        <div class="sidebar__user">
+            <div class="sidebar__avatar">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="#64748b" stroke-width="1.5"/><path d="M3 18c0-3.31 3.13-6 7-6s7 2.69 7 6" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+                <p class="sidebar__user-name">{{ Auth::user()->name }}</p>
+                <p class="sidebar__user-role">Premium Member</p>
+            </div>
+        </div>
+    </aside>
+
+    {{-- MAIN --}}
+    <main class="dash-main">
+
+        {{-- TOP BAR --}}
+        <div class="topbar">
+            <div>
+                <h1 class="topbar__title">Halo, {{ Auth::user()->name }}!</h1>
+                <p class="topbar__sub">Semoga harimu menyenangkan.</p>
+            </div>
+            <div class="topbar__right">
+                <div class="search-box">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#94a3b8" stroke-width="1.5"/><path d="M10.5 10.5l3 3" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <input type="text" placeholder="Cari mahasiswa, kelas...">
+                </div>
+                <button class="topbar__icon-btn" aria-label="Notifikasi">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2a6 6 0 00-6 6v2.586l-1.707 1.707A1 1 0 003 14h14a1 1 0 00.707-1.707L16 10.586V8a6 6 0 00-6-6z" stroke="#475569" stroke-width="1.5"/><path d="M8 14a2 2 0 004 0" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </button>
+                <button class="topbar__icon-btn" aria-label="Pengaturan">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="2.5" stroke="#475569" stroke-width="1.5"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </button>
+            </div>
+        </div>
+
+        {{-- RINGKASAN --}}
+        <section class="section">
+            <h2 class="section__title">Ringkasan Pengajaran</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card__top">
+                        <div class="stat-card__icon" style="background:#EFF6FF;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#2563EB" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round"/></svg>
+                        </div>
+                        <span class="stat-card__badge stat-card__badge--green">↗ +5%</span>
+                    </div>
+                    <p class="stat-card__label">Total Mahasiswa</p>
+                    <p class="stat-card__value">120</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__top">
+                        <div class="stat-card__icon" style="background:#EFF6FF;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#2563EB" stroke-width="1.8"/><path d="M8 21h8M12 17v4" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <p class="stat-card__label">Kelas Aktif</p>
+                    <p class="stat-card__value">4</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__top">
+                        <div class="stat-card__icon" style="background:#EFF6FF;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2563EB" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <span class="stat-card__badge stat-card__badge--gray">Minggu ini</span>
+                    </div>
+                    <p class="stat-card__label">Jam Mengajar</p>
+                    <p class="stat-card__value">32 <span style="font-size:1rem;font-weight:500;color:#64748b;">jam</span></p>
+                </div>
+            </div>
+        </section>
+
+        {{-- JADWAL + TUGAS --}}
+        <div class="bottom-grid">
+
+            {{-- Jadwal --}}
+            <section class="section">
+                <div class="section__head">
+                    <h2 class="section__title">Jadwal Mengajar Hari Ini</h2>
+                    <a href="#" class="section__link">Lihat Semua</a>
+                </div>
+                <div class="schedule-list">
+
+                    <div class="sched-card sched-card--active">
+                        <div class="sched-card__time">
+                            <span class="sched-card__hour">08:00</span>
+                            <span class="sched-card__end">09:40</span>
+                        </div>
+                        <div class="sched-card__body">
+                            <span class="sched-badge sched-badge--live">Sedang Berlangsung</span>
+                            <p class="sched-card__name">Aljabar Linear (Kls A)</p>
+                            <div class="sched-card__meta">
+                                <span>
+                                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 1a5 5 0 100 10A5 5 0 007 1zM7 3v4l2.5 1.5" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/></svg>
+                                    Ruang 402
+                                </span>
+                                <span>
+                                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 12c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="4.5" r="2.5" stroke="#94a3b8" stroke-width="1.3"/></svg>
+                                    45 Mhs
+                                </span>
+                            </div>
+                        </div>
+                        <button class="sched-btn sched-btn--primary">Masuk Kelas</button>
+                    </div>
+
+                    <div class="sched-card">
+                        <div class="sched-card__time">
+                            <span class="sched-card__hour">10:00</span>
+                            <span class="sched-card__end">11:40</span>
+                        </div>
+                        <div class="sched-card__body">
+                            <p class="sched-card__name">Kalkulus II (Kls C)</p>
+                            <div class="sched-card__meta">
+                                <span>
+                                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 1a5 5 0 100 10A5 5 0 007 1zM7 3v4l2.5 1.5" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/></svg>
+                                    Lab Komputer 1
+                                </span>
+                                <span>
+                                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 12c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="4.5" r="2.5" stroke="#94a3b8" stroke-width="1.3"/></svg>
+                                    30 Mhs
+                                </span>
+                            </div>
+                        </div>
+                        <button class="sched-btn sched-btn--ghost">Siapkan Materi</button>
+                    </div>
+
+                    <div class="sched-card">
+                        <div class="sched-card__time">
+                            <span class="sched-card__hour">13:00</span>
+                            <span class="sched-card__end">15:30</span>
+                        </div>
+                        <div class="sched-card__body">
+                            <p class="sched-card__name">Statistika Lanjut (Kls B)</p>
+                            <div class="sched-card__meta">
+                                <span>
+                                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 1a5 5 0 100 10A5 5 0 007 1zM7 3v4l2.5 1.5" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/></svg>
+                                    Ruang 305
+                                </span>
+                                <span>
+                                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 12c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="4.5" r="2.5" stroke="#94a3b8" stroke-width="1.3"/></svg>
+                                    40 Mhs
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            {{-- Tugas --}}
+            <section class="section">
+                <h2 class="section__title">Tugas Menunggu Dinilai</h2>
+                <div class="task-card">
+
+                    <div class="task-item">
+                        <div class="task-item__head">
+                            <p class="task-item__name">Kuis 1: Matriks</p>
+                            <span class="task-badge task-badge--blue">24/45</span>
+                        </div>
+                        <p class="task-item__class">Aljabar Linear</p>
+                        <div class="task-bar"><div class="task-bar__fill task-bar__fill--blue" style="width:53%"></div></div>
+                        <div class="task-item__foot">
+                            <span class="task-item__deadline">Tenggat: Besok</span>
+                            <span class="task-item__pct">53% Selesai</span>
+                        </div>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-item__head">
+                            <p class="task-item__name">Tugas Akhir Bab 3</p>
+                            <span class="task-badge task-badge--red">5/30</span>
+                        </div>
+                        <p class="task-item__class">Kalkulus II</p>
+                        <div class="task-bar"><div class="task-bar__fill task-bar__fill--red" style="width:16%"></div></div>
+                        <div class="task-item__foot">
+                            <span class="task-item__deadline task-item__deadline--urgent">Tenggat: Hari Ini</span>
+                            <span class="task-item__pct">16% Selesai</span>
+                        </div>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-item__head">
+                            <p class="task-item__name">Laporan Praktikum</p>
+                            <span class="task-badge task-badge--green">38/40</span>
+                        </div>
+                        <p class="task-item__class">Statistika Lanjut</p>
+                        <div class="task-bar"><div class="task-bar__fill task-bar__fill--green" style="width:95%"></div></div>
+                        <div class="task-item__foot">
+                            <span class="task-item__deadline">Tenggat: Lusa</span>
+                            <span class="task-item__pct">95% Selesai</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn-all-tasks">Lihat Semua Tugas</a>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+</div>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+.dash-page{
+    display:flex;
+    min-height:100vh;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:#F1F5F9;
+    color:#0F172A;
+}
+
+/* ── SIDEBAR ── */
+.sidebar{
+    width:240px;
+    flex-shrink:0;
+    background:#fff;
+    border-right:1px solid #E2E8F0;
+    display:flex;
+    flex-direction:column;
+    padding:1.25rem 0;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+}
+.sidebar__brand{
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    padding:.25rem 1.25rem 1.25rem;
+    border-bottom:1px solid #F1F5F9;
+    margin-bottom:.5rem;
+}
+.sidebar__brand-name{font-size:.95rem;font-weight:700;color:#0F172A;line-height:1.2;}
+.sidebar__brand-sub{font-size:.68rem;color:#94A3B8;}
+
+.sidebar__nav{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:.15rem;
+    padding:.5rem .75rem;
+}
+.sidebar__link{
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    padding:.65rem .85rem;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:.85rem;
+    font-weight:500;
+    color:#475569;
+    transition:background .18s,color .18s;
+}
+.sidebar__link:hover{background:#F8FAFC;color:#2563EB;}
+.sidebar__link--active{background:#EFF6FF;color:#2563EB;font-weight:600;}
+
+.sidebar__user{
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    padding:1rem 1.25rem;
+    border-top:1px solid #F1F5F9;
+    margin-top:auto;
+}
+.sidebar__avatar{
+    width:36px;height:36px;
+    border-radius:50%;
+    background:#E2E8F0;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+}
+.sidebar__user-name{font-size:.82rem;font-weight:600;color:#0F172A;}
+.sidebar__user-role{font-size:.68rem;color:#94A3B8;}
+
+/* ── MAIN ── */
+.dash-main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    padding:1.5rem 2rem;
+    gap:1.5rem;
+    overflow-x:hidden;
+}
+
+/* ── TOPBAR ── */
+.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+}
+.topbar__title{font-size:1.5rem;font-weight:800;color:#0F172A;letter-spacing:-.03em;}
+.topbar__sub{font-size:.83rem;color:#64748B;margin-top:.1rem;}
+.topbar__right{display:flex;align-items:center;gap:.6rem;}
+
+.search-box{
+    display:flex;align-items:center;gap:.5rem;
+    background:#fff;border:1px solid #E2E8F0;
+    border-radius:10px;padding:.5rem .9rem;
+    width:260px;
+}
+.search-box input{
+    border:none;outline:none;
+    font-size:.83rem;color:#0F172A;
+    font-family:inherit;width:100%;
+    background:transparent;
+}
+.search-box input::placeholder{color:#94A3B8;}
+
+.topbar__icon-btn{
+    width:38px;height:38px;
+    border:1px solid #E2E8F0;
+    background:#fff;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:background .18s;
+}
+.topbar__icon-btn:hover{background:#F1F5F9;}
+
+/* ── SECTION ── */
+.section{display:flex;flex-direction:column;gap:.85rem;}
+.section__head{display:flex;align-items:center;justify-content:space-between;}
+.section__title{font-size:1rem;font-weight:700;color:#0F172A;}
+.section__link{font-size:.82rem;font-weight:600;color:#2563EB;text-decoration:none;}
+.section__link:hover{text-decoration:underline;}
+
+/* ── STATS ── */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.stat-card{
+    background:#fff;border:1px solid #E2E8F0;
+    border-radius:16px;padding:1.25rem;
+    display:flex;flex-direction:column;gap:.5rem;
+}
+.stat-card__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem;}
+.stat-card__icon{
+    width:42px;height:42px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+}
+.stat-card__badge{font-size:.68rem;font-weight:700;padding:.2rem .55rem;border-radius:99px;}
+.stat-card__badge--green{background:#DCFCE7;color:#15803D;}
+.stat-card__badge--gray{background:#F1F5F9;color:#64748B;}
+.stat-card__label{font-size:.78rem;color:#64748B;}
+.stat-card__value{font-size:2rem;font-weight:800;color:#0F172A;letter-spacing:-.04em;line-height:1;}
+
+/* ── BOTTOM GRID ── */
+.bottom-grid{display:grid;grid-template-columns:1fr 320px;gap:1.5rem;align-items:start;}
+
+/* ── SCHEDULE ── */
+.schedule-list{display:flex;flex-direction:column;gap:.75rem;}
+.sched-card{
+    background:#fff;border:1px solid #E2E8F0;
+    border-radius:14px;padding:1rem 1.1rem;
+    display:flex;align-items:center;gap:1rem;
+    border-left:3px solid transparent;
+}
+.sched-card--active{border-left-color:#2563EB;}
+.sched-card__time{
+    display:flex;flex-direction:column;
+    align-items:flex-end;flex-shrink:0;
+    min-width:44px;
+}
+.sched-card__hour{font-size:.92rem;font-weight:700;color:#0F172A;}
+.sched-card__end{font-size:.72rem;color:#94A3B8;}
+.sched-card__body{flex:1;display:flex;flex-direction:column;gap:.25rem;}
+.sched-badge{display:inline-flex;width:fit-content;}
+.sched-badge--live{
+    font-size:.65rem;font-weight:700;
+    background:#DCFCE7;color:#15803D;
+    padding:.18rem .55rem;border-radius:99px;
+}
+.sched-card__name{font-size:.9rem;font-weight:600;color:#0F172A;}
+.sched-card__meta{display:flex;gap:.9rem;}
+.sched-card__meta span{
+    display:flex;align-items:center;gap:.28rem;
+    font-size:.72rem;color:#94A3B8;
+}
+.sched-btn{
+    flex-shrink:0;
+    font-size:.78rem;font-weight:600;
+    border-radius:9px;padding:.5rem 1rem;
+    border:none;cursor:pointer;
+    font-family:inherit;
+    transition:background .18s,transform .15s;
+    white-space:nowrap;
+}
+.sched-btn--primary{background:#2563EB;color:#fff;}
+.sched-btn--primary:hover{background:#1d4ed8;transform:translateY(-1px);}
+.sched-btn--ghost{background:#fff;color:#475569;border:1.5px solid #e2e8f0;}
+.sched-btn--ghost:hover{color:#2563EB;border-color:#2563EB;box-shadow:0 2px 8px rgba(37,99,235,.1);transform:translateY(-1px);}
+
+/* ── TUGAS ── */
+.task-card{
+    background:#fff;border:1px solid #E2E8F0;
+    border-radius:16px;padding:1.1rem;
+    display:flex;flex-direction:column;gap:1rem;
+}
+.task-item{display:flex;flex-direction:column;gap:.35rem;}
+.task-item__head{display:flex;align-items:center;justify-content:space-between;}
+.task-item__name{font-size:.88rem;font-weight:600;color:#0F172A;}
+.task-badge{font-size:.7rem;font-weight:700;padding:.18rem .55rem;border-radius:6px;}
+.task-badge--blue{background:#DBEAFE;color:#1D4ED8;}
+.task-badge--red{background:#FEE2E2;color:#DC2626;}
+.task-badge--green{background:#DCFCE7;color:#15803D;}
+.task-item__class{font-size:.72rem;color:#64748B;}
+.task-bar{height:6px;background:#F1F5F9;border-radius:99px;overflow:hidden;}
+.task-bar__fill{height:100%;border-radius:99px;transition:width .4s;}
+.task-bar__fill--blue{background:#2563EB;}
+.task-bar__fill--red{background:#EF4444;}
+.task-bar__fill--green{background:#22C55E;}
+.task-item__foot{display:flex;justify-content:space-between;}
+.task-item__deadline{font-size:.7rem;color:#64748B;}
+.task-item__deadline--urgent{color:#EF4444;font-weight:600;}
+.task-item__pct{font-size:.7rem;color:#94A3B8;}
+
+.btn-all-tasks{
+    display:flex;align-items:center;justify-content:center;
+    padding:.65rem;border-radius:10px;
+    border:1.5px solid #E2E8F0;background:#fff;
+    font-size:.82rem;font-weight:600;color:#475569;
+    text-decoration:none;transition:color .2s,border-color .2s,box-shadow .2s,transform .15s;
+    font-family:inherit;
+}
+.btn-all-tasks:hover{color:#2563EB;border-color:#2563EB;box-shadow:0 2px 8px rgba(37,99,235,.1);transform:translateY(-1px);}
+
+/* ── HOVER & ACTIVE STATES ── */
+
+/* Stat cards */
+.stat-card{transition:box-shadow .2s,transform .2s;}
+.stat-card:hover{box-shadow:0 6px 24px rgba(37,99,235,.10);transform:translateY(-2px);}
+
+/* Schedule cards */
+.sched-card{transition:box-shadow .2s,transform .2s,border-color .2s;}
+.sched-card:hover{box-shadow:0 4px 18px rgba(15,23,42,.08);transform:translateY(-1px);}
+.sched-card--active:hover{border-left-color:#1d4ed8;}
+
+/* Schedule buttons active (klik) */
+.sched-btn:active{transform:scale(.96);}
+.sched-btn--primary:active{background:#1e40af;}
+.sched-btn--ghost:active{background:#CBD5E1;}
+
+/* Task items */
+.task-item{padding:.5rem .35rem;border-radius:10px;transition:background .18s;}
+.task-item:hover{background:#F8FAFC;}
+
+/* Lihat Semua Tugas button */
+.btn-all-tasks:active{background:#E2E8F0;transform:scale(.98);}
+
+/* Sidebar links active */
+.sidebar__link:active{background:#DBEAFE;}
+
+/* Sidebar user hover */
+.sidebar__user{border-radius:10px;margin:.5rem .75rem 0;transition:background .18s;cursor:pointer;}
+.sidebar__user:hover{background:#F8FAFC;}
+
+/* Topbar icon buttons active */
+.topbar__icon-btn:active{background:#E2E8F0;transform:scale(.93);}
+
+/* Search box focus */
+.search-box{transition:border-color .18s,box-shadow .18s;}
+.search-box:focus-within{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.10);}
+
+/* Section link */
+.section__link{transition:color .18s;}
+.section__link:active{color:#1d4ed8;}
+
+@media(max-width:900px){
+    .sidebar{display:none;}
+    .bottom-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:560px){
+    .dash-main{padding:1rem;}
+    .stats-grid{grid-template-columns:1fr;}
+    .search-box{width:160px;}
+}
+</style>
+
+@endsection

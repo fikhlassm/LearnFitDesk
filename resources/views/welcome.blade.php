@@ -270,8 +270,8 @@
     .hero__img-fallback svg { display: block; margin: 0 auto 16px; }
     .hero__badge-card {
         position: absolute;
-        bottom: -18px;
-        left: -24px;
+        bottom: 16px;
+        right: 16px;
         background: #fff;
         border-radius: 14px;
         padding: 14px 18px;
@@ -280,6 +280,7 @@
         gap: 12px;
         box-shadow: 0 8px 32px rgba(37,99,235,.14);
         animation: float 3s ease-in-out infinite;
+        width: fit-content;
     }
     .badge-card__title { font-size: 12px; font-weight: 700; color: var(--slate-900); margin-bottom: 2px; }
     .badge-card__sub { font-size: 11px; color: var(--slate-400); }
@@ -434,7 +435,7 @@
     @media (max-width: 768px) {
         .hero { padding: 72px 0 60px; }
         .hero__inner { grid-template-columns: 1fr; gap: 48px; }
-        .hero__badge-card { left: 12px; }
+        .hero__badge-card { bottom: 12px; right: 12px; }
         .features__grid { grid-template-columns: 1fr; }
         .testimonials__grid { grid-template-columns: 1fr; }
         .testi-stats { gap: 16px 0; }
