@@ -114,6 +114,15 @@ class QuizController extends Controller
         return redirect()->route('quiz.result');
     }
 
+    public function retake()
+    {
+        $user = Auth::user();
+        $user->quiz_result = null;
+        $user->save();
+
+        return redirect()->route('quiz');
+    }
+
     /**
      * Show the quiz result page.
      */

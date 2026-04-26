@@ -305,7 +305,7 @@ $m = $methods[$result] ?? $methods['active_recall'];
     <div class="rs-nav__inner">
         <a href="/" class="rs-nav__brand">
             <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
-                <rect width="28" height="28" rx="8" fill="{{ $m['color_main'] }}"/>
+                <rect width="28" height="28" rx="8" fill="#2563EB"/>
                 <path d="M8 10h12M8 14h8M8 18h10" stroke="white" stroke-width="2" stroke-linecap="round"/>
             </svg>
             <span class="rs-nav__name">LearnFit</span>
@@ -354,6 +354,10 @@ $m = $methods[$result] ?? $methods['active_recall'];
                         <a href="{{ route('welcome') }}" class="rs-btn-start">
                             Mulai Belajar
                             <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                        <a href="{{ route('quiz.retake') }}" class="rs-btn-start" style="background:#1e293b; border:1px solid #334155;">
+                            Ikut Quiz Ulang
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M13 8A5 5 0 1 1 8 3M13 3v3h-3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </a>
                         <button class="rs-btn-share-sm" onclick="shareResult()" title="Bagikan">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="11" cy="2.5" r="1.8" stroke="currentColor" stroke-width="1.3"/><circle cx="2.5" cy="7" r="1.8" stroke="currentColor" stroke-width="1.3"/><circle cx="11" cy="11.5" r="1.8" stroke="currentColor" stroke-width="1.3"/><path d="M4.2 6.1 L9.3 3.4 M4.2 7.9 L9.3 10.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>

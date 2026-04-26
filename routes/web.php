@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/quiz', [QuizController::class, 'show'])->name('quiz');
     Route::post('/quiz', [QuizController::class, 'submit'])->name('quiz.submit');
     Route::get('/quiz/hasil', [QuizController::class, 'result'])->name('quiz.result');
+    Route::get('/quiz/ulang', [QuizController::class, 'retake'])->name('quiz.retake');
 });
 
 // Dashboard Pengajar
