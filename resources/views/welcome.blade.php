@@ -406,22 +406,16 @@
     }
     .cta-bottom__desc { font-size: 15px; color: rgba(255,255,255,.75); line-height: 1.6; }
 
-    /* ─── FOOTER ─── */
-    .footer {
-        background: var(--slate-900);
-        padding: 36px 0;
-    }
-    .footer__inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-        flex-wrap: wrap;
-    }
-    .footer__brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .footer__tagline { font-size: 13px; color: var(--slate-400); }
-    .footer__copy { font-size: 13px; color: var(--slate-400); }
-    .footer .navbar__brand-name { color: #fff; }
+        /* ─── FOOTER ─── */
+        .footer { background: var(--slate-900); padding: 36px 0; }
+    .footer__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .footer__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .footer__brand-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #fff; }
+    .footer__tagline { font-size: 13px; color: var(--slate-400); white-space: nowrap; flex: 1; }
+    .footer__nav { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
+    .footer__nav-link { font-size: 13px; color: var(--slate-400); text-decoration: none; transition: color .2s; white-space: nowrap; }
+    .footer__nav-link:hover { color: #fff; }
+    .footer__copy { font-size: 13px; color: var(--slate-400); white-space: nowrap; flex-shrink: 0; }
 
     /* ─── ANIMATE ─── */
     [data-animate] { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; transition-delay: var(--delay, 0ms); }
@@ -444,9 +438,10 @@
         .navbar__links, .navbar__actions { display: none; }
         .navbar__hamburger { display: flex; }
         .cta-bottom__inner { flex-direction: column; text-align: center; }
-        .footer__inner { flex-direction: column; text-align: center; }
     }
     @media (max-width: 480px) {
+        .footer__inner { flex-direction: column; text-align: center; }
+        .footer__nav { justify-content: center; }
         .hero__title { font-size: 36px; }
     }
 </style>
@@ -773,17 +768,20 @@
 
 {{-- FOOTER --}}
 <footer class="footer">
-    <div class="container footer__inner">
-        <div class="footer__brand">
-            <a href="/" class="navbar__brand">
-                <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
-                    <rect width="28" height="28" rx="8" fill="#2563EB"/>
-                    <path d="M8 10h12M8 14h8M8 18h10" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <span class="navbar__brand-name">LearnFit</span>
-            </a>
-            <p class="footer__tagline">Temukan gaya belajarmu yang paling efektif bersama kami.</p>
-        </div>
+    <div class="footer__inner">
+        <a href="/" class="footer__brand">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+                <rect width="28" height="28" rx="8" fill="#2563EB"/>
+                <path d="M8 10h12M8 14h8M8 18h10" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="footer__brand-name">LearnFit</span>
+        </a>
+        <p class="footer__tagline">Temukan gaya belajarmu yang paling efektif bersama kami.</p>
+        <nav class="footer__nav">
+            <a href="/" class="footer__nav-link">Beranda</a>
+            <a href="{{ route('about') }}" class="footer__nav-link">Tentang Kami</a>
+            <a href="{{ route('contact') }}" class="footer__nav-link">Kontak</a>
+        </nav>
         <p class="footer__copy">&copy; {{ date('Y') }} LearnFit. All rights reserved.</p>
     </div>
 </footer>

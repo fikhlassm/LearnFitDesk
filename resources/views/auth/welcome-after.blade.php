@@ -19,9 +19,9 @@
     display: flex;
     align-items: center;
     height: 68px;
-    max-width: 1100px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding-inline: 2rem;
+    padding: 0 24px;
 }
 .wa-navbar__brand {
     display: flex;
@@ -47,9 +47,9 @@
     justify-content: space-between;
     gap: 24px;
     flex-wrap: wrap;
-    max-width: 1100px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding-inline: 2rem;
+    padding: 0 24px;
 }
 .wa-footer__brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .wa-footer__brand-name { font-size: 20px; font-weight: 700; color: #fff; }
@@ -67,7 +67,7 @@
     flex-direction: column;
 }
 
-.container { width: 100%; max-width: 1100px; margin: 0 auto; padding-inline: 2rem; }
+.container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
 .page-body {
     display: grid;
@@ -302,7 +302,7 @@
     .wa-footer__links { justify-content: center; }
 }
 @media(max-width:560px){
-    .container       { padding-inline: 1rem; }
+    .container       { padding: 0 1rem; }
     .col-right       { grid-template-columns: 1fr; }
     .ql-grid         { grid-template-columns: 1fr; }
     .rec-card__actions { flex-direction: column; }
@@ -360,7 +360,7 @@
                 <h2 class="rec-card__title">Cari Metode Belajarmu</h2>
                 <p class="rec-card__desc">Ambil tes singkat untuk menemukan gaya belajar yang paling sesuai dengan kepribadian dan kebutuhan unikmu.</p>
                 <div class="rec-card__actions">
-                    <a href="#" class="btn-primary">Mulai Quiz <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                    <a href="{{ route('quiz') }}" class="btn-primary">Mulai Quiz <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                     <button class="btn-ghost">Lakukan Nanti</button>
                 </div>
             </div>
