@@ -361,7 +361,7 @@
                 <p class="rec-card__desc">Ambil tes singkat untuk menemukan gaya belajar yang paling sesuai dengan kepribadian dan kebutuhan unikmu.</p>
                 <div class="rec-card__actions">
                     <a href="{{ route('quiz') }}" class="btn-primary">Mulai Quiz <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-                    <button class="btn-ghost">Lakukan Nanti</button>
+                    <a href="{{ route('dashboard.siswa') }}" class="btn-ghost" style="text-decoration: none;">Lakukan Nanti</a>
                 </div>
             </div>
 

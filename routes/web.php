@@ -43,6 +43,11 @@ Route::get('/dashboard/kelas', function () {
     return view('dashboard.kelas-saya');
 })->middleware('auth')->name('dashboard.kelas');
 
+// Dashboard Siswa
+Route::get('/dashboard/siswa', function () {
+    return view('dashboard.siswa');
+})->middleware('auth')->name('dashboard.siswa');
+
 
 Route::get('/tentang', function () {
     return view('about');

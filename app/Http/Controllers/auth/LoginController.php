@@ -31,8 +31,13 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            if (Auth::user()->role === 'pengajar') {
+            $user = Auth::user();
+            if ($user->role === 'pengajar') {
                 return redirect()->route('dashboard.pengajar');
+            }
+            // Siswa: langsung ke dashboard jika sudah quiz, ke welcome-after jika belum
+            if ($user->quiz_result) {
+                return redirect()->route('dashboard.siswa');
             }
             return redirect()->route('welcome');
         }

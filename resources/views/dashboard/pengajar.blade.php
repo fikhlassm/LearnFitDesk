@@ -56,6 +56,9 @@
 
         {{-- TOP BAR --}}
         <div class="topbar">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Buka Menu">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="#475569" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
             <div>
                 <h1 class="topbar__title">Halo, {{ Auth::user()->name }}!</h1>
                 <p class="topbar__sub">Semoga harimu menyenangkan.</p>
@@ -238,6 +241,7 @@
         </div>
 
     </main>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 </div>
 
 <style>
@@ -506,8 +510,35 @@
 .section__link{transition:color .18s;}
 .section__link:active{color:#1d4ed8;}
 
+.hamburger{
+    display:none;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:10px;
+    border:1px solid #E2E8F0;background:#fff;
+    cursor:pointer;flex-shrink:0;
+    transition:background .18s;
+}
+.hamburger:hover{background:#F1F5F9;}
+.sidebar-overlay{display:none;}
+
 @media(max-width:900px){
-    .sidebar{display:none;}
+    .hamburger{display:flex;}
+    .sidebar{
+        position:fixed;top:0;left:-260px;z-index:200;
+        height:100vh;width:240px;
+        transition:left .28s cubic-bezier(.4,0,.2,1);
+        box-shadow:none;
+    }
+    .sidebar.sidebar--open{
+        left:0;
+        box-shadow:4px 0 24px rgba(15,23,42,.15);
+    }
+    .sidebar-overlay{
+        display:none;position:fixed;inset:0;
+        background:rgba(15,23,42,.35);z-index:199;
+        backdrop-filter:blur(2px);
+        transition:opacity .28s;opacity:0;
+    }
+    .sidebar-overlay.overlay--show{display:block;opacity:1;}
     .bottom-grid{grid-template-columns:1fr;}
     .stats-grid{grid-template-columns:1fr 1fr;}
 }
@@ -518,4 +549,25 @@
 }
 </style>
 
+<script>
+const sidebar = document.querySelector('.sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+const hamburger = document.getElementById('hamburgerBtn');
+
+hamburger.addEventListener('click', () => {
+    sidebar.classList.add('sidebar--open');
+    overlay.classList.add('overlay--show');
+});
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('sidebar--open');
+    overlay.classList.remove('overlay--show');
+});
+// Tutup drawer saat klik link sidebar
+document.querySelectorAll('.sidebar__link').forEach(link => {
+    link.addEventListener('click', () => {
+        sidebar.classList.remove('sidebar--open');
+        overlay.classList.remove('overlay--show');
+    });
+});
+</script>
 @endsection

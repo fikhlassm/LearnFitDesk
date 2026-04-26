@@ -32,7 +32,7 @@
             </a>
             <a href="#" class="sidebar__link">
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6 8h8M6 11h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 14l1.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                Tugas & Penilaian
+                Tugas dan Penilaian
             </a>
             <a href="#" class="sidebar__link">
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 18c0-3.31 3.13-6 7-6s7 2.69 7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -56,6 +56,9 @@
 
         {{-- TOP BAR --}}
         <div class="topbar">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Buka Menu">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="#475569" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
             <div>
                 <h1 class="topbar__title">Kelas Saya</h1>
                 <p class="topbar__sub">Kelola dan pantau aktivitas kelas yang Anda ampu semester ini.</p>
@@ -194,6 +197,7 @@
         </div>
 
     </main>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 </div>
 
 <style>
@@ -431,13 +435,41 @@
 }
 .empty-state__text{font-size:.9rem;font-weight:500;}
 
+.hamburger{
+    display:none;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:10px;
+    border:1px solid #E2E8F0;background:#fff;
+    cursor:pointer;flex-shrink:0;
+    transition:background .18s;
+}
+.hamburger:hover{background:#F1F5F9;}
+.sidebar-overlay{display:none;}
+
 /* ── RESPONSIVE ── */
 @media(max-width:1100px){
     .kelas-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:900px){
-    .sidebar{display:none;}
-    .kelas-grid{grid-template-columns:1fr;}
+    .hamburger{display:flex;}
+    .sidebar{
+        position:fixed;top:0;left:-260px;z-index:200;
+        height:100vh;width:240px;
+        transition:left .28s cubic-bezier(.4,0,.2,1);
+        box-shadow:none;
+    }
+    .sidebar.sidebar--open{
+        left:0;
+        box-shadow:4px 0 24px rgba(15,23,42,.15);
+    }
+    .sidebar-overlay{
+        display:none;position:fixed;inset:0;
+        background:rgba(15,23,42,.35);z-index:199;
+        backdrop-filter:blur(2px);
+        transition:opacity .28s;opacity:0;
+    }
+    .sidebar-overlay.overlay--show{display:block;opacity:1;}
+    .bottom-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:560px){
     .dash-main{padding:1rem;}
@@ -481,4 +513,25 @@ function filterKelas() {
 }
 </script>
 
+<script>
+const sidebar = document.querySelector('.sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+const hamburger = document.getElementById('hamburgerBtn');
+
+hamburger.addEventListener('click', () => {
+    sidebar.classList.add('sidebar--open');
+    overlay.classList.add('overlay--show');
+});
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('sidebar--open');
+    overlay.classList.remove('overlay--show');
+});
+// Tutup drawer saat klik link sidebar
+document.querySelectorAll('.sidebar__link').forEach(link => {
+    link.addEventListener('click', () => {
+        sidebar.classList.remove('sidebar--open');
+        overlay.classList.remove('overlay--show');
+    });
+});
+</script>
 @endsection

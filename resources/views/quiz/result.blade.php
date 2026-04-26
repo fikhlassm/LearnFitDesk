@@ -351,7 +351,7 @@ $m = $methods[$result] ?? $methods['active_recall'];
                     <h2 class="rs-method-card__name">{{ $m['name'] }}</h2>
                     <p class="rs-method-card__desc">{{ $m['desc'] }}</p>
                     <div class="rs-method-card__cta">
-                        <a href="{{ route('welcome') }}" class="rs-btn-start">
+                        <a href="{{ route('dashboard.siswa') }}" class="rs-btn-start">
                             Mulai Belajar
                             <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </a>
