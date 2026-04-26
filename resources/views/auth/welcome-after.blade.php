@@ -36,28 +36,15 @@
 }
 
 /* ─── FOOTER ─── */
-.wa-footer {
-    background: #0f172a;
-    padding: 36px 0;
-    margin-top: 2rem;
-}
-.wa-footer__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-.wa-footer__brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.wa-footer__brand-name { font-size: 20px; font-weight: 700; color: #fff; }
-.wa-footer__tagline { font-size: 13px; color: #94a3b8; }
-.wa-footer__links { display: flex; gap: 1.5rem; }
-.wa-footer__link { font-size: 13px; color: #94a3b8; text-decoration: none; transition: color .2s; }
+.wa-footer { background: #0f172a; padding: 36px 0; }
+.wa-footer__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.wa-footer__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; line-height: 1; }
+.wa-footer__brand-name { font-size: 20px; font-weight: 700; color: #fff; line-height: 1; }
+.wa-footer__tagline { font-size: 13px; color: #94a3b8; flex: 1; }
+.wa-footer__links { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
+.wa-footer__link { font-size: 13px; color: #94a3b8; text-decoration: none; transition: color .2s; white-space: nowrap; }
 .wa-footer__link:hover { color: #fff; }
-.wa-footer__copy { font-size: 13px; color: #94a3b8; }
+.wa-footer__copy { font-size: 13px; color: #94a3b8; white-space: nowrap; flex-shrink: 0; }
 
 /* ─── PAGE LAYOUT ─── */
 .welcome-page {
@@ -174,6 +161,8 @@
     border: 1.5px solid #e2e8f0;
     cursor: pointer;
     transition: color .2s, border-color .2s, box-shadow .2s, transform .15s;
+    display: inline-flex;
+    justify-content: center;
 }
 .btn-ghost:hover {
     color: #2563EB;
@@ -298,8 +287,9 @@
     .page-body { grid-template-columns: 1fr; }
     .col-right { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
     .illus-card { grid-column: 1/-1; }
-    .wa-footer__inner { flex-direction: column; text-align: center; }
-    .wa-footer__links { justify-content: center; }
+    .wa-footer__inner { flex-direction: column; text-align: center; align-items: center; }
+    .wa-footer__links { justify-content: center; flex-wrap: wrap; }
+    .wa-footer__tagline { text-align: center; }
 }
 @media(max-width:560px){
     .container       { padding: 0 1rem; }
@@ -472,21 +462,19 @@
 {{-- FOOTER --}}
 <footer class="wa-footer">
     <div class="wa-footer__inner">
-        <div class="wa-footer__brand">
-            <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-                <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
-                    <rect width="28" height="28" rx="8" fill="#2563EB"/>
-                    <path d="M8 10h12M8 14h8M8 18h10" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <span class="wa-footer__brand-name">LearnFit</span>
-            </a>
-            <p class="wa-footer__tagline">Temukan gaya belajarmu yang paling efektif bersama kami.</p>
-        </div>
-        <div class="wa-footer__links">
+        <a href="/" class="wa-footer__brand">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style="display:block;">
+                <rect width="28" height="28" rx="8" fill="#2563EB"/>
+                <path d="M8 10h12M8 14h8M8 18h10" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="wa-footer__brand-name">LearnFit</span>
+        </a>
+        <p class="wa-footer__tagline">Temukan gaya belajarmu yang paling efektif bersama kami.</p>
+        <nav class="wa-footer__links">
             <a href="#" class="wa-footer__link">Bantuan</a>
             <a href="#" class="wa-footer__link">Privasi</a>
             <a href="#" class="wa-footer__link">Syarat &amp; Ketentuan</a>
-        </div>
+        </nav>
         <p class="wa-footer__copy">&copy; {{ date('Y') }} LearnFit. Hak Cipta Dilindungi.</p>
     </div>
 </footer>

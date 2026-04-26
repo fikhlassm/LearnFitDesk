@@ -76,12 +76,22 @@ $userName = Auth::user()->name;
                 <p class="topbar__sub">Semangat belajar, {{ explode(' ', $userName)[0] }}! 🎯</p>
             </div>
             <div class="topbar__right">
-                <button class="topbar__icon-btn" aria-label="Cari" style="position:relative;">
+                <div class="search-box" id="searchBox">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#94a3b8" stroke-width="1.5"/><path d="M10.5 10.5l3 3" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <input type="text" placeholder="Cari materi, sesi..." id="searchInput">
+                    <button class="search-box__close" id="searchClose" aria-label="Tutup pencarian">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </button>
+                </div>
+                <button class="topbar__icon-btn search-toggle" id="searchToggle" aria-label="Cari">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.5" stroke="#475569" stroke-width="1.5"/><path d="M13 13l3.5 3.5" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/></svg>
                 </button>
                 <button class="topbar__icon-btn" aria-label="Notifikasi" style="position:relative;">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2a6 6 0 00-6 6v2.586l-1.707 1.707A1 1 0 003 14h14a1 1 0 00.707-1.707L16 10.586V8a6 6 0 00-6-6z" stroke="#475569" stroke-width="1.5"/><path d="M8 14a2 2 0 004 0" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/></svg>
                     <span class="notif-dot"></span>
+                </button>
+                <button class="topbar__icon-btn" aria-label="Pengaturan">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="2.5" stroke="#475569" stroke-width="1.5"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/></svg>
                 </button>
             </div>
         </div>
@@ -284,6 +294,17 @@ $userName = Auth::user()->name;
     width:8px;height:8px;border-radius:50%;
     background:#EF4444;border:1.5px solid #fff;
 }
+.search-box{
+    display:flex;align-items:center;gap:.5rem;
+    background:#fff;border:1px solid #E2E8F0;
+    border-radius:10px;padding:.5rem .9rem;
+    width:260px;transition:border-color .18s,box-shadow .18s;
+}
+.search-box:focus-within{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.10);}
+.search-box input{border:none;outline:none;font-size:.83rem;color:#0F172A;font-family:inherit;width:100%;background:transparent;}
+.search-box input::placeholder{color:#94A3B8;}
+.search-box__close{display:none;background:none;border:none;cursor:pointer;padding:0;line-height:0;flex-shrink:0;}
+.search-toggle{display:none;}
 
 /* ── HERO CARD ── */
 .hero-card{
@@ -477,6 +498,15 @@ $userName = Auth::user()->name;
     .sidebar-overlay.overlay--show{display:block;opacity:1;}
     .hero-card{flex-direction:column;align-items:flex-start;}
     .hero-card__right{flex-direction:row;align-items:center;}
+    .search-box{display:none;}
+    .search-box.search-box--open{
+        display:flex;
+        position:fixed;top:12px;left:50%;transform:translateX(-50%);
+        width:calc(100vw - 2rem);max-width:420px;
+        z-index:300;box-shadow:0 4px 20px rgba(15,23,42,.15);
+    }
+    .search-box.search-box--open .search-box__close{display:flex;}
+    .search-toggle{display:flex;}
 }
 @media(max-width:560px){
     .dash-main{padding:1rem;}
@@ -506,6 +536,20 @@ document.querySelectorAll('.sidebar__link').forEach(link => {
         sidebar.classList.remove('sidebar--open');
         overlay.classList.remove('overlay--show');
     });
+});
+
+const searchBox = document.getElementById('searchBox');
+const searchToggle = document.getElementById('searchToggle');
+const searchClose = document.getElementById('searchClose');
+const searchInput = document.getElementById('searchInput');
+
+searchToggle.addEventListener('click', () => {
+    searchBox.classList.add('search-box--open');
+    searchInput.focus();
+});
+searchClose.addEventListener('click', () => {
+    searchBox.classList.remove('search-box--open');
+    searchInput.value = '';
 });
 </script>
 @endsection

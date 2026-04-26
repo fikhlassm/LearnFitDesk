@@ -64,10 +64,16 @@
                 <p class="topbar__sub">Kelola dan pantau aktivitas kelas yang Anda ampu semester ini.</p>
             </div>
             <div class="topbar__right">
-                <div class="search-box">
+                <div class="search-box" id="searchBox">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#94a3b8" stroke-width="1.5"/><path d="M10.5 10.5l3 3" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>
                     <input type="text" placeholder="Cari kelas..." id="searchKelas">
+                    <button class="search-box__close" id="searchClose" aria-label="Tutup pencarian">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </button>
                 </div>
+                <button class="topbar__icon-btn search-toggle" id="searchToggle" aria-label="Cari">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.5" stroke="#475569" stroke-width="1.5"/><path d="M13 13l3.5 3.5" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </button>
                 <button class="topbar__icon-btn" aria-label="Notifikasi" style="position:relative;">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2a6 6 0 00-6 6v2.586l-1.707 1.707A1 1 0 003 14h14a1 1 0 00.707-1.707L16 10.586V8a6 6 0 00-6-6z" stroke="#475569" stroke-width="1.5"/><path d="M8 14a2 2 0 004 0" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/></svg>
                     <span class="notif-dot"></span>
@@ -272,6 +278,8 @@
 .search-box:focus-within{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.10);}
 .search-box input{border:none;outline:none;font-size:.83rem;color:#0F172A;font-family:inherit;width:100%;background:transparent;}
 .search-box input::placeholder{color:#94A3B8;}
+.search-box__close{display:none;background:none;border:none;cursor:pointer;padding:0;line-height:0;flex-shrink:0;}
+.search-toggle{display:none;}
 .topbar__icon-btn{
     width:38px;height:38px;border:1px solid #E2E8F0;
     background:#fff;border-radius:10px;
@@ -470,10 +478,18 @@
     .sidebar-overlay.overlay--show{display:block;opacity:1;}
     .bottom-grid{grid-template-columns:1fr;}
     .stats-grid{grid-template-columns:1fr 1fr;}
+    .search-box{display:none;}
+    .search-box.search-box--open{
+        display:flex;
+        position:fixed;top:12px;left:50%;transform:translateX(-50%);
+        width:calc(100vw - 2rem);max-width:420px;
+        z-index:300;box-shadow:0 4px 20px rgba(15,23,42,.15);
+    }
+    .search-box.search-box--open .search-box__close{display:flex;}
+    .search-toggle{display:flex;}
 }
 @media(max-width:560px){
     .dash-main{padding:1rem;}
-    .search-box{width:140px;}
     .action-bar{flex-direction:column;align-items:flex-start;}
 }
 </style>
@@ -532,6 +548,21 @@ document.querySelectorAll('.sidebar__link').forEach(link => {
         sidebar.classList.remove('sidebar--open');
         overlay.classList.remove('overlay--show');
     });
+});
+
+const searchBox = document.getElementById('searchBox');
+const searchToggle = document.getElementById('searchToggle');
+const searchClose = document.getElementById('searchClose');
+const searchKelas = document.getElementById('searchKelas');
+
+searchToggle.addEventListener('click', () => {
+    searchBox.classList.add('search-box--open');
+    searchKelas.focus();
+});
+searchClose.addEventListener('click', () => {
+    searchBox.classList.remove('search-box--open');
+    searchKelas.value = '';
+    filterKelas();
 });
 </script>
 @endsection
