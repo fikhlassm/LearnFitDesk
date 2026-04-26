@@ -18,11 +18,11 @@
         </div>
 
         <nav class="sidebar__nav">
-            <a href="#" class="sidebar__link sidebar__link--active">
+            <a href="{{ route('dashboard.pengajar') }}" class="sidebar__link sidebar__link--active">
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="11" y="2" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="2" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/><rect x="11" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/></svg>
                 Beranda
             </a>
-            <a href="#" class="sidebar__link">
+            <a href="{{ route('dashboard.kelas') }}" class="sidebar__link">
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 18c0-3.31 3.13-6 7-6s7 2.69 7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="15.5" cy="7.5" r="2.5" fill="currentColor" opacity=".3"/></svg>
                 Kelas Saya
             </a>
@@ -46,7 +46,7 @@
             </div>
             <div>
                 <p class="sidebar__user-name">{{ Auth::user()->name }}</p>
-                <p class="sidebar__user-role">Premium Member</p>
+                <p class="sidebar__user-role">Pengajar</p>
             </div>
         </div>
     </aside>
@@ -492,7 +492,7 @@
 .sidebar__link:active{background:#DBEAFE;}
 
 /* Sidebar user hover */
-.sidebar__user{border-radius:10px;margin:.5rem .75rem 0;transition:background .18s;cursor:pointer;}
+.sidebar__user{border-radius:10px;margin:.5rem .75rem 0;transition:background .18s;cursor:pointer;padding:.85rem 1.25rem;}
 .sidebar__user:hover{background:#F8FAFC;}
 
 /* Topbar icon buttons active */

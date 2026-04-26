@@ -39,6 +39,11 @@ Route::get('/dashboard/pengajar', function () {
     return view('dashboard.pengajar');
 })->middleware('auth')->name('dashboard.pengajar');
 
+Route::get('/dashboard/kelas', function () {
+    return view('dashboard.kelas-saya');
+})->middleware('auth')->name('dashboard.kelas');
+
+
 Route::get('/tentang', function () {
     return view('about');
 })->name('about');
