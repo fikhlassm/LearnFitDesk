@@ -321,15 +321,15 @@
     .contact__map-frame iframe { width: 100%; height: 100%; border: none; display: block; }
 
     /* ─── FOOTER ─── */
-    .wa-footer { background: #0f172a; padding: 36px 0; }
-    .wa-footer__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
-    .wa-footer__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; line-height: 1; }
-    .wa-footer__brand-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #fff; line-height: 1; }
-    .wa-footer__tagline { font-size: 13px; color: #94a3b8; flex: 1; }
-    .wa-footer__links { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
-    .wa-footer__link { font-size: 13px; color: #94a3b8; text-decoration: none; transition: color .2s; white-space: nowrap; }
-    .wa-footer__link:hover { color: #fff; }
-    .wa-footer__copy { font-size: 13px; color: #94a3b8; white-space: nowrap; flex-shrink: 0; }
+    .c-footer { background: #0f172a; padding: 36px 0; }
+    .c-footer__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .c-footer__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; line-height: 1; }
+    .c-footer__brand-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #fff; line-height: 1; }
+    .c-footer__tagline { font-size: 13px; color: #94a3b8; flex: 1; }
+    .c-footer__links { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
+    .c-footer__link { font-size: 13px; color: #94a3b8; text-decoration: none; transition: color .2s; white-space: nowrap; }
+    .c-footer__link:hover { color: #fff; }
+    .c-footer__copy { font-size: 13px; color: #94a3b8; white-space: nowrap; flex-shrink: 0; }
 
     /* ─── ANIMATE ─── */
     [data-animate] { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; transition-delay: var(--delay, 0ms); }
@@ -346,9 +346,9 @@
         .navbar__hamburger { display: flex; }
     }
     @media (max-width: 480px) {
-        .wa-footer__inner { flex-direction: column; text-align: center; align-items: center; }
-        .wa-footer__links { justify-content: center; flex-wrap: wrap; }
-        .wa-footer__tagline { text-align: center; }
+        .c-footer__inner { flex-direction: column; text-align: center; align-items: center; }
+        .c-footer__links { justify-content: center; flex-wrap: wrap; }
+        .c-footer__tagline { text-align: center; }
     }
 </style>
 
@@ -644,22 +644,22 @@
 </section>
 
 {{-- FOOTER --}}
-<footer class="wa-footer">
-    <div class="wa-footer__inner">
-        <a href="/" class="wa-footer__brand">
+<footer class="c-footer">
+    <div class="c-footer__inner">
+        <a href="/" class="c-footer__brand">
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style="display:block;">
                 <rect width="28" height="28" rx="8" fill="#2563EB"/>
                 <path d="M8 10h12M8 14h8M8 18h10" stroke="white" stroke-width="2" stroke-linecap="round"/>
             </svg>
-            <span class="wa-footer__brand-name">LearnFit</span>
+            <span class="c-footer__brand-name">LearnFit</span>
         </a>
-        <p class="wa-footer__tagline">Temukan gaya belajarmu yang paling efektif bersama kami.</p>
-        <nav class="wa-footer__links">
-            <a href="/" class="wa-footer__link">Beranda</a>
-            <a href="{{ route('about') }}" class="wa-footer__link">Tentang Kami</a>
-            <a href="{{ route('contact') }}" class="wa-footer__link">Kontak</a>
+        <p class="c-footer__tagline">Temukan gaya belajarmu yang paling efektif bersama kami.</p>
+        <nav class="c-footer__links">
+            <a href="/" class="c-footer__link">Beranda</a>
+            <a href="{{ route('about') }}" class="c-footer__link">Tentang Kami</a>
+            <a href="{{ route('contact') }}" class="c-footer__link">Kontak</a>
         </nav>
-        <p class="wa-footer__copy">&copy; {{ date('Y') }} LearnFit. Hak Cipta Dilindungi.</p>
+        <p class="c-footer__copy">&copy; {{ date('Y') }} LearnFit. Hak Cipta Dilindungi.</p>
     </div>
 </footer>
 

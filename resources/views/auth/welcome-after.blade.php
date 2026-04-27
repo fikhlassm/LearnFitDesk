@@ -297,6 +297,8 @@
     .ql-grid         { grid-template-columns: 1fr; }
     .rec-card__actions { flex-direction: column; }
     .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+    .page-body       { padding-block: 1.5rem 2.5rem; }
+    .welcome-page    { padding-bottom: -1.5rem; }
 }
 </style>
 

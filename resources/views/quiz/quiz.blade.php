@@ -162,9 +162,11 @@
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:640px){
-    .qz-qcard { grid-template-columns: 1fr; }
+    .qz-qcard { grid-template-columns: 1fr; min-height: unset; }
     .qz-qcard__illus { min-height: 110px; }
+    .qz-qcard__body { min-height: 120px; }
     .qz-options { grid-template-columns: 1fr; }
+    .qz-page { padding-block: 1.5rem 9rem; }
 }
 </style>
 

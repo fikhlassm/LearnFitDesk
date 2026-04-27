@@ -10,14 +10,14 @@ $methods = [
         'desc'       => 'Kamu bekerja paling baik dalam sprint terkonsentrasi. Teknik Pomodoro membagi sesi belajar menjadi 25 menit fokus penuh diikuti 5 menit istirahat, menjaga otakmu tetap segar dan terhindar dari burnout.',
         'match'      => 91,
         'match_label'=> 'Sangat Tinggi',
-        'color_main' => '#e11d48',
-        'color_soft' => '#fff1f2',
-        'color_mid'  => '#fecdd3',
-        'color_bar'  => 'linear-gradient(90deg,#e11d48,#fb7185)',
-        'color_dark' => '#be123c',
-        'icon_bg'    => '#fecdd3',
-        'badge_color'=> '#be123c',
-        'badge_bg'   => '#ffe4e6',
+        'color_main' => '#2563EB',
+        'color_soft' => '#EFF6FF',
+        'color_mid'  => '#DBEAFE',
+        'color_bar'  => 'linear-gradient(90deg,#1d4ed8,#60a5fa)',
+        'color_dark' => '#1e40af',
+        'icon_bg'    => '#DBEAFE',
+        'badge_color'=> '#1e40af',
+        'badge_bg'   => '#EFF6FF',
         'advantages' => [
             ['icon'=>'⚡','title'=>'Anti-Burnout','desc'=>'Istirahat terstruktur mencegah kelelahan mental setelah belajar lama.'],
             ['icon'=>'📈','title'=>'Produktivitas Terukur','desc'=>'Kamu bisa melacak berapa "tomat" yang sudah diselesaikan per hari.'],
@@ -27,7 +27,7 @@ $methods = [
             ['num'=>'02','icon'=>'🎯','title'=>'Belajar Penuh Fokus','desc'=>'Selama 25 menit, hanya fokus pada satu topik. Jika ada gangguan, catat dan abaikan dulu.'],
             ['num'=>'03','icon'=>'☕','title'=>'Istirahat 5 Menit','desc'=>'Berdiri, regangkan badan, atau minum air. Hindari layar selama jeda singkat ini.'],
         ],
-        'illus_emoji' => '🍅',
+        'illus_emoji' => '⌚',
     ],
     'active_recall' => [
         'name'       => 'Active Recall',
@@ -35,14 +35,14 @@ $methods = [
         'desc'       => 'Kamu memproses informasi terdalam saat otak dipaksa mengambil kembali memori tanpa bantuan. Active Recall terbukti secara ilmiah meningkatkan retensi hingga 3x lebih baik dibanding membaca ulang.',
         'match'      => 94,
         'match_label'=> 'Sangat Tinggi',
-        'color_main' => '#2563eb',
-        'color_soft' => '#eff6ff',
-        'color_mid'  => '#dbeafe',
-        'color_bar'  => 'linear-gradient(90deg,#1d4ed8,#60a5fa)',
-        'color_dark' => '#1e40af',
-        'icon_bg'    => '#dbeafe',
-        'badge_color'=> '#1e40af',
-        'badge_bg'   => '#dbeafe',
+        'color_main' => '#7C3AED',
+        'color_soft' => '#F5F3FF',
+        'color_mid'  => '#DDD6FE',
+        'color_bar'  => 'linear-gradient(90deg,#6d28d9,#a78bfa)',
+        'color_dark' => '#5b21b6',
+        'icon_bg'    => '#DDD6FE',
+        'badge_color'=> '#5b21b6',
+        'badge_bg'   => '#F5F3FF',
         'advantages' => [
             ['icon'=>'⚡','title'=>'Retensi Cepat','desc'=>'Ingatan bertahan 3x lebih lama dibanding metode membaca ulang biasa.'],
             ['icon'=>'🔍','title'=>'Identifikasi Gap','desc'=>'Menemukan bagian materi yang belum benar-benar dikuasai dengan akurat.'],
@@ -60,14 +60,14 @@ $methods = [
         'desc'       => 'Kamu paling efektif saat menulis dan merangkum secara mandiri. Metode Blurting melatih otakmu untuk mengambil informasi secara aktif: baca materi, tutup buku, lalu tulis semua yang kamu ingat di kertas kosong.',
         'match'      => 88,
         'match_label'=> 'Tinggi',
-        'color_main' => '#16a34a',
-        'color_soft' => '#f0fdf4',
-        'color_mid'  => '#bbf7d0',
-        'color_bar'  => 'linear-gradient(90deg,#15803d,#4ade80)',
-        'color_dark' => '#15803d',
-        'icon_bg'    => '#bbf7d0',
-        'badge_color'=> '#166534',
-        'badge_bg'   => '#dcfce7',
+        'color_main' => '#059669',
+        'color_soft' => '#ECFDF5',
+        'color_mid'  => '#A7F3D0',
+        'color_bar'  => 'linear-gradient(90deg,#059669,#34d399)',
+        'color_dark' => '#065f46',
+        'icon_bg'    => '#A7F3D0',
+        'badge_color'=> '#065f46',
+        'badge_bg'   => '#ECFDF5',
         'advantages' => [
             ['icon'=>'✍️','title'=>'Aktif & Mandiri','desc'=>'Menulis sendiri jauh lebih efektif daripada membaca ulang secara pasif.'],
             ['icon'=>'🎯','title'=>'Temukan Celah','desc'=>'Bagian yang tidak bisa kamu tulis adalah bagian yang perlu dipelajari ulang.'],
@@ -85,14 +85,14 @@ $methods = [
         'desc'       => 'Kamu memahami sesuatu paling dalam saat menjelaskannya ke orang lain. Teknik Feynman—dinamai dari fisikawan Richard Feynman—mengharuskan kamu menjelaskan konsep dengan bahasa sesederhana mungkin, sehingga celah pemahamanmu langsung terungkap.',
         'match'      => 96,
         'match_label'=> 'Sangat Tinggi',
-        'color_main' => '#7c3aed',
-        'color_soft' => '#fdf4ff',
-        'color_mid'  => '#e9d5ff',
-        'color_bar'  => 'linear-gradient(90deg,#6d28d9,#a78bfa)',
-        'color_dark' => '#5b21b6',
-        'icon_bg'    => '#e9d5ff',
-        'badge_color'=> '#5b21b6',
-        'badge_bg'   => '#ede9fe',
+        'color_main' => '#D97706',
+        'color_soft' => '#FFFBEB',
+        'color_mid'  => '#FDE68A',
+        'color_bar'  => 'linear-gradient(90deg,#b45309,#fbbf24)',
+        'color_dark' => '#92400e',
+        'icon_bg'    => '#FDE68A',
+        'badge_color'=> '#92400e',
+        'badge_bg'   => '#FFFBEB',
         'advantages' => [
             ['icon'=>'💡','title'=>'Pemahaman Mendalam','desc'=>'Kamu tidak bisa menjelaskan sesuatu yang tidak benar-benar kamu pahami.'],
             ['icon'=>'🗣️','title'=>'Komunikasi Efektif','desc'=>'Melatih kemampuan menjelaskan konsep kompleks dengan cara yang mudah dicerna.'],
@@ -255,18 +255,14 @@ $m = $methods[$result] ?? $methods['active_recall'];
 
 /* ─── FOOTER ─── */
 .rs-footer { background: #0f172a; padding: 36px 0; }
-.rs-footer__inner {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 24px; flex-wrap: wrap;
-    max-width: 1180px; margin: 0 auto; padding: 0 24px;
-}
-.rs-footer__brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.rs-footer__brand-name { font-size: 18px; font-weight: 700; color: #fff; }
-.rs-footer__tagline { font-size: 13px; color: #94a3b8; }
-.rs-footer__links { display: flex; gap: 1.5rem; }
-.rs-footer__link { font-size: 13px; color: #94a3b8; text-decoration: none; transition: color .2s; }
+.rs-footer__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.rs-footer__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; line-height: 1; }
+.rs-footer__brand-name { font-size: 20px; font-weight: 700; color: #fff; line-height: 1; }
+.rs-footer__tagline { font-size: 13px; color: #94a3b8; flex: 1; }
+.rs-footer__links { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
+.rs-footer__link { font-size: 13px; color: #94a3b8; text-decoration: none; transition: color .2s; white-space: nowrap; }
 .rs-footer__link:hover { color: #fff; }
-.rs-footer__copy { font-size: 13px; color: #94a3b8; }
+.rs-footer__copy { font-size: 13px; color: #94a3b8; white-space: nowrap; flex-shrink: 0; }
 
 /* ─── ENTRANCE ANIMATIONS ─── */
 [data-rs] {
@@ -282,8 +278,9 @@ $m = $methods[$result] ?? $methods['active_recall'];
     .rs-method-card__top { grid-template-columns: 1fr; }
     .rs-method-card__illus { min-height: 120px; }
     .rs-steps-grid { grid-template-columns: 1fr; }
-    .rs-footer__inner { flex-direction: column; text-align: center; }
-    .rs-footer__links { justify-content: center; }
+    .rs-footer__inner { flex-direction: column; text-align: center; align-items: center; }
+    .rs-footer__links { justify-content: center; flex-wrap: wrap; }
+    .rs-footer__tagline { text-align: center; }
 }
 </style>
 
@@ -423,21 +420,19 @@ $m = $methods[$result] ?? $methods['active_recall'];
 {{-- FOOTER --}}
 <footer class="rs-footer">
     <div class="rs-footer__inner">
-        <div class="rs-footer__brand">
-            <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-                <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
-                    <rect width="28" height="28" rx="8" fill="#2563EB"/>
-                    <path d="M8 10h12M8 14h8M8 18h10" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <span class="rs-footer__brand-name">LearnFit</span>
-            </a>
-            <p class="rs-footer__tagline">Temukan gaya belajarmu yang paling efektif bersama kami.</p>
-        </div>
-        <div class="rs-footer__links">
+        <a href="/" class="rs-footer__brand">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style="display:block;">
+                <rect width="28" height="28" rx="8" fill="#2563EB"/>
+                <path d="M8 10h12M8 14h8M8 18h10" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="rs-footer__brand-name">LearnFit</span>
+        </a>
+        <p class="rs-footer__tagline">Temukan gaya belajarmu yang paling efektif bersama kami.</p>
+        <nav class="rs-footer__links">
             <a href="#" class="rs-footer__link">Bantuan</a>
             <a href="#" class="rs-footer__link">Privasi</a>
             <a href="#" class="rs-footer__link">Syarat &amp; Ketentuan</a>
-        </div>
+        </nav>
         <p class="rs-footer__copy">&copy; {{ date('Y') }} LearnFit. Hak Cipta Dilindungi.</p>
     </div>
 </footer>

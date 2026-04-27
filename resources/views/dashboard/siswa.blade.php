@@ -4,10 +4,10 @@
 
 @php
 $methodMap = [
-    'pomodoro'     => ['label'=>'Pomodoro',     'color'=>'#2563EB', 'bg'=>'#EFF6FF', 'icon'=>'⏱'],
+    'pomodoro'     => ['label'=>'Pomodoro',     'color'=>'#2563EB', 'bg'=>'#EFF6FF', 'icon'=>'⌚'],
     'active_recall'=> ['label'=>'Active Recall', 'color'=>'#7C3AED', 'bg'=>'#F5F3FF', 'icon'=>'🧠'],
     'blurting'     => ['label'=>'Blurting',      'color'=>'#059669', 'bg'=>'#ECFDF5', 'icon'=>'✍️'],
-    'feynman'      => ['label'=>'Feynman',        'color'=>'#D97706', 'bg'=>'#FFFBEB', 'icon'=>'💡'],
+    'feynman'      => ['label'=>'Feynman',        'color'=>'#D97706', 'bg'=>'#FFFBEB', 'icon'=>'🏫'],
 ];
 $result   = Auth::user()->quiz_result;
 $method   = $result ? ($methodMap[$result] ?? null) : null;
