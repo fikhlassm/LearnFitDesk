@@ -5,7 +5,7 @@
 <div class="dash-page">
 
     {{-- SIDEBAR --}}
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
         <div class="sidebar__brand">
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                 <rect width="28" height="28" rx="8" fill="#2563EB"/>
@@ -61,149 +61,181 @@
             </button>
             <div>
                 <h1 class="topbar__title">Kelas Saya</h1>
-                <p class="topbar__sub">Kelola dan pantau aktivitas kelas yang Anda ampu semester ini.</p>
+                <p class="topbar__sub">Kelola semua kelas yang Anda ampu</p>
             </div>
             <div class="topbar__right">
-                <div class="search-box" id="searchBox">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#94a3b8" stroke-width="1.5"/><path d="M10.5 10.5l3 3" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>
-                    <input type="text" placeholder="Cari kelas..." id="searchKelas">
-                    <button class="search-box__close" id="searchClose" aria-label="Tutup pencarian">
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/></svg>
-                    </button>
-                </div>
-                <button class="topbar__icon-btn search-toggle" id="searchToggle" aria-label="Cari">
-                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.5" stroke="#475569" stroke-width="1.5"/><path d="M13 13l3.5 3.5" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/></svg>
-                </button>
-                <button class="topbar__icon-btn" aria-label="Notifikasi" style="position:relative;">
+                <button class="topbar__icon-btn" aria-label="Notifikasi">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2a6 6 0 00-6 6v2.586l-1.707 1.707A1 1 0 003 14h14a1 1 0 00.707-1.707L16 10.586V8a6 6 0 00-6-6z" stroke="#475569" stroke-width="1.5"/><path d="M8 14a2 2 0 004 0" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/></svg>
-                    <span class="notif-dot"></span>
                 </button>
                 <button class="topbar__icon-btn" aria-label="Pengaturan">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="2.5" stroke="#475569" stroke-width="1.5"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/></svg>
                 </button>
+                <form method="POST" action="{{ route('logout') }}" style="margin:0">
+                    @csrf
+                    <button type="submit" class="topbar__icon-btn" title="Logout">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M7 3H4a1 1 0 00-1 1v12a1 1 0 001 1h3M13 14l3-4-3-4M16 10H7" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </form>
             </div>
         </div>
+
+        {{-- FLASH MESSAGE --}}
+        @if(session('success'))
+        <div class="alert-success" id="flashMsg">{{ session('success') }}</div>
+        @endif
 
         {{-- ACTION BAR --}}
         <div class="action-bar">
-            <div class="filter-tabs">
-                <button class="filter-tab filter-tab--active" data-filter="semua">Semua</button>
-                <button class="filter-tab" data-filter="aktif">Aktif</button>
-                <button class="filter-tab" data-filter="draft">Draft</button>
+            <div>
+                <h2 class="section__title">Daftar Kelas</h2>
             </div>
-            <div class="action-bar__right">
-                <div class="semester-select">
-                    <span>Semester Ganjil 2023/2024</span>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+                <div class="search-box-kelas">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#94a3b8" stroke-width="1.5"/><path d="M10.5 10.5l3 3" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <input type="text" id="searchKelas" placeholder="Cari kelas...">
                 </div>
-                <button class="btn-tambah-kelas">
-                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
-                    Mulai Kelas Baru
-                </button>
+                <button class="btn-tambah-kelas" onclick="openModal('modalTambah')">+ Tambah Kelas</button>
             </div>
         </div>
 
-        {{-- KELAS GRID --}}
-        <div class="kelas-grid" id="kelasGrid">
-
-            {{-- Kelas 1: Aktif --}}
-            <div class="kelas-card" data-status="aktif" data-nama="kalkulus">
-                <div class="kelas-card__thumb kelas-card__thumb--1">
-                    <span class="kelas-status kelas-status--aktif">● Aktif</span>
-                </div>
-                <div class="kelas-card__body">
-                    <span class="kelas-code">MAT-101</span>
-                    <h3 class="kelas-name">Kalkulus I</h3>
-                    <p class="kelas-desc">Konsep dasar limit, turunan, dan integral dengan aplikasi pada sains…</p>
-                    <div class="kelas-meta">
-                        <span class="kelas-meta__item">
-                            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 12c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="4.5" r="2.5" stroke="#94a3b8" stroke-width="1.3"/></svg>
-                            45 Mahasiswa
-                        </span>
-                        <span class="kelas-meta__item">
-                            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="#94a3b8" stroke-width="1.3"/><path d="M4 1v2M10 1v2M1 6h12" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/></svg>
-                            Sesi: Besok, 08:00 WIB
-                        </span>
-                    </div>
-                    <div class="kelas-card__foot">
-                        <div class="kelas-avatars">
-                            <span class="kelas-avatar">A</span>
-                            <span class="kelas-avatar">B</span>
-                            <span class="kelas-avatar kelas-avatar--more">+43</span>
-                        </div>
-                        <a href="#" class="btn-lihat-detail">Lihat Detail →</a>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Kelas 2: Aktif --}}
-            <div class="kelas-card" data-status="aktif" data-nama="statistika">
-                <div class="kelas-card__thumb kelas-card__thumb--2">
-                    <span class="kelas-status kelas-status--aktif">● Aktif</span>
-                </div>
-                <div class="kelas-card__body">
-                    <span class="kelas-code">STA-205</span>
-                    <h3 class="kelas-name">Statistika Dasar</h3>
-                    <p class="kelas-desc">Pengantar probabilitas, distribusi data, dan pengujian hipotesis untuk…</p>
-                    <div class="kelas-meta">
-                        <span class="kelas-meta__item">
-                            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 12c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="4.5" r="2.5" stroke="#94a3b8" stroke-width="1.3"/></svg>
-                            32 Mahasiswa
-                        </span>
-                        <span class="kelas-meta__item">
-                            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="#94a3b8" stroke-width="1.3"/><path d="M4 1v2M10 1v2M1 6h12" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/></svg>
-                            Sesi: Lusa, 10:00 WIB
-                        </span>
-                    </div>
-                    <div class="kelas-card__foot">
-                        <div class="kelas-avatars">
-                            <span class="kelas-avatar">C</span>
-                            <span class="kelas-avatar">D</span>
-                            <span class="kelas-avatar kelas-avatar--more">+30</span>
-                        </div>
-                        <a href="#" class="btn-lihat-detail">Lihat Detail →</a>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Kelas 3: Draft --}}
-            <div class="kelas-card" data-status="draft" data-nama="fisika">
-                <div class="kelas-card__thumb kelas-card__thumb--3">
-                    <span class="kelas-status kelas-status--draft">● Draft</span>
-                </div>
-                <div class="kelas-card__body">
-                    <span class="kelas-code">FIS-301</span>
-                    <h3 class="kelas-name">Fisika Kuantum</h3>
-                    <p class="kelas-desc">Mekanika gelombang, persamaan Schrödinger, dan aplikasi pada…</p>
-                    <div class="kelas-meta">
-                        <span class="kelas-meta__item kelas-meta__item--empty">
-                            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 12c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="#cbd5e1" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="4.5" r="2.5" stroke="#cbd5e1" stroke-width="1.3"/></svg>
-                            Belum ada mahasiswa
-                        </span>
-                        <span class="kelas-meta__item kelas-meta__item--empty">
-                            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1.5" stroke="#cbd5e1" stroke-width="1.3"/><path d="M4 1v2M10 1v2M1 6h12" stroke="#cbd5e1" stroke-width="1.3" stroke-linecap="round"/></svg>
-                            Jadwal belum ditentukan
-                        </span>
-                    </div>
-                    <div class="kelas-card__foot">
-                        <button class="btn-tambah-mhs">
-                            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 3v8M3 7h8" stroke="#2563EB" stroke-width="1.6" stroke-linecap="round"/></svg>
-                        </button>
-                        <a href="#" class="btn-edit-draf">Edit Draf ✏</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        {{-- EMPTY STATE (tersembunyi, muncul kalau filter kosong) --}}
-        <div class="empty-state" id="emptyState" style="display:none;">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="40" height="32" rx="4" stroke="#CBD5E1" stroke-width="2"/><path d="M16 24h16M16 30h10" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round"/></svg>
-            <p class="empty-state__text">Tidak ada kelas ditemukan</p>
+        {{-- TABEL --}}
+        <div class="table-wrap">
+            <table class="kelas-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Kelas</th>
+                        <th>Mata Pelajaran</th>
+                        <th>Kode Kelas</th>
+                        <th>Kapasitas</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="kelasBody">
+                    @foreach($kelasList as $index => $kelas)
+                    <tr class="kelas-row">
+                        <td>{{ $index + 1 }}</td>
+                        <td><strong>{{ $kelas->nama_kelas }}</strong></td>
+                        <td>{{ $kelas->mata_pelajaran }}</td>
+                        <td><span class="badge-kode">{{ $kelas->kode_kelas }}</span></td>
+                        <td>{{ $kelas->kapasitas }} siswa</td>
+                        <td><span class="badge-status badge-{{ $kelas->status }}">{{ ucfirst($kelas->status) }}</span></td>
+                        <td class="aksi-col">
+                            <button class="btn-edit" onclick="openEdit({{ $kelas->id }},'{{ addslashes($kelas->nama_kelas) }}','{{ addslashes($kelas->mata_pelajaran) }}','{{ $kelas->kode_kelas }}','{{ addslashes($kelas->deskripsi) }}',{{ $kelas->kapasitas }},'{{ $kelas->status }}')">✏ Edit</button>
+                            <form method="POST" action="{{ route('kelas.destroy', $kelas->id) }}" style="display:inline" onsubmit="return confirm('Hapus kelas ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-hapus">🗑 Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
 
     </main>
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
+</div>
+
+{{-- MODAL TAMBAH --}}
+<div class="modal-overlay" id="modalTambah">
+    <div class="modal">
+        <div class="modal__header">
+            <h2 class="modal__title">Tambah Kelas Baru</h2>
+            <button class="modal__close" onclick="closeModal('modalTambah')">✕</button>
+        </div>
+        <form method="POST" action="{{ route('kelas.store') }}">
+            @csrf
+            <div class="modal__body">
+                <div class="form-group">
+                    <label>Nama Kelas</label>
+                    <input type="text" name="nama_kelas" required placeholder="cth: Matematika Dasar A">
+                </div>
+                <div class="form-group">
+                    <label>Mata Pelajaran</label>
+                    <input type="text" name="mata_pelajaran" required placeholder="cth: Matematika">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Kode Kelas</label>
+                        <input type="text" name="kode_kelas" required placeholder="cth: MTK-A-01">
+                    </div>
+                    <div class="form-group">
+                        <label>Kapasitas</label>
+                        <input type="number" name="kapasitas" required min="1" max="100" value="30">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="status">
+                        <option value="aktif">Aktif</option>
+                        <option value="draf">Draf</option>
+                        <option value="selesai">Selesai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi <span style="color:#94a3b8">(opsional)</span></label>
+                    <textarea name="deskripsi" rows="3" placeholder="Deskripsi singkat kelas..."></textarea>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button type="button" class="btn-batal" onclick="closeModal('modalTambah')">Batal</button>
+                <button type="submit" class="btn-simpan">Simpan Kelas</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{-- MODAL EDIT --}}
+<div class="modal-overlay" id="modalEdit">
+    <div class="modal">
+        <div class="modal__header">
+            <h2 class="modal__title">Edit Kelas</h2>
+            <button class="modal__close" onclick="closeModal('modalEdit')">✕</button>
+        </div>
+        <form method="POST" id="formEdit" action="">
+            @csrf
+            @method('PUT')
+            <div class="modal__body">
+                <div class="form-group">
+                    <label>Nama Kelas</label>
+                    <input type="text" name="nama_kelas" id="e_nama" required>
+                </div>
+                <div class="form-group">
+                    <label>Mata Pelajaran</label>
+                    <input type="text" name="mata_pelajaran" id="e_mapel" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Kode Kelas</label>
+                        <input type="text" name="kode_kelas" id="e_kode" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Kapasitas</label>
+                        <input type="number" name="kapasitas" id="e_kap" required min="1" max="100">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="status" id="e_status">
+                        <option value="aktif">Aktif</option>
+                        <option value="draf">Draf</option>
+                        <option value="selesai">Selesai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi <span style="color:#94a3b8">(opsional)</span></label>
+                    <textarea name="deskripsi" id="e_desk" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button type="button" class="btn-batal" onclick="closeModal('modalEdit')">Batal</button>
+                <button type="submit" class="btn-simpan">Simpan Perubahan</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <style>
@@ -217,10 +249,10 @@
     color:#0F172A;
 }
 
-/* ── SIDEBAR (sama persis dgn pengajar) ── */
+/* ── SIDEBAR ── */
 .sidebar{
-    width:240px;flex-shrink:0;
-    background:#fff;border-right:1px solid #E2E8F0;
+    width:240px;flex-shrink:0;background:#fff;
+    border-right:1px solid #E2E8F0;
     display:flex;flex-direction:column;
     padding:1.25rem 0;
     position:sticky;top:0;height:100vh;overflow-y:auto;
@@ -228,32 +260,37 @@
 .sidebar__brand{
     display:flex;align-items:center;gap:.7rem;
     padding:.25rem 1.25rem 1.25rem;
-    border-bottom:1px solid #F1F5F9;margin-bottom:.5rem;
+    border-bottom:1px solid #F1F5F9;
+    margin-bottom:.5rem;
 }
 .sidebar__brand-name{font-size:.95rem;font-weight:700;color:#0F172A;line-height:1.2;}
 .sidebar__brand-sub{font-size:.68rem;color:#94A3B8;}
-.sidebar__nav{flex:1;display:flex;flex-direction:column;gap:.15rem;padding:.5rem .75rem;}
+.sidebar__nav{
+    flex:1;display:flex;flex-direction:column;
+    gap:.15rem;padding:.5rem .75rem;
+}
 .sidebar__link{
     display:flex;align-items:center;gap:.7rem;
     padding:.65rem .85rem;border-radius:10px;
-    text-decoration:none;font-size:.85rem;font-weight:500;color:#475569;
-    transition:background .18s,color .18s;
+    text-decoration:none;font-size:.85rem;font-weight:500;
+    color:#475569;transition:background .18s,color .18s;
 }
 .sidebar__link:hover{background:#F8FAFC;color:#2563EB;}
 .sidebar__link--active{background:#EFF6FF;color:#2563EB;font-weight:600;}
 .sidebar__link:active{background:#DBEAFE;}
-
 .sidebar__user{
     display:flex;align-items:center;gap:.7rem;
-    padding:.85rem 1.25rem;border-top:1px solid #F1F5F9;
-    border-radius:10px;margin:.5rem .75rem 0;
+    padding:.85rem 1.25rem;
+    border-top:1px solid #F1F5F9;
+    margin:.5rem .75rem 0;
+    border-radius:10px;
     transition:background .18s;cursor:pointer;
 }
 .sidebar__user:hover{background:#F8FAFC;}
 .sidebar__avatar{
     width:36px;height:36px;border-radius:50%;
-    background:#E2E8F0;
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    background:#E2E8F0;display:flex;
+    align-items:center;justify-content:center;flex-shrink:0;
 }
 .sidebar__user-name{font-size:.82rem;font-weight:600;color:#0F172A;}
 .sidebar__user-role{font-size:.68rem;color:#94A3B8;}
@@ -261,202 +298,179 @@
 /* ── MAIN ── */
 .dash-main{
     flex:1;display:flex;flex-direction:column;
-    padding:1.5rem 2rem;gap:1.25rem;overflow-x:hidden;
+    padding:1.5rem 2rem;gap:1.5rem;overflow-x:hidden;
 }
 
 /* ── TOPBAR ── */
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.topbar{
+    display:flex;align-items:center;
+    justify-content:space-between;gap:1rem;
+}
 .topbar__title{font-size:1.5rem;font-weight:800;color:#0F172A;letter-spacing:-.03em;}
 .topbar__sub{font-size:.83rem;color:#64748B;margin-top:.1rem;}
 .topbar__right{display:flex;align-items:center;gap:.6rem;}
-.search-box{
-    display:flex;align-items:center;gap:.5rem;
-    background:#fff;border:1px solid #E2E8F0;
-    border-radius:10px;padding:.5rem .9rem;width:220px;
-    transition:border-color .18s,box-shadow .18s;
-}
-.search-box:focus-within{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.10);}
-.search-box input{border:none;outline:none;font-size:.83rem;color:#0F172A;font-family:inherit;width:100%;background:transparent;}
-.search-box input::placeholder{color:#94A3B8;}
-.search-box__close{display:none;background:none;border:none;cursor:pointer;padding:0;line-height:0;flex-shrink:0;}
-.search-toggle{display:none;}
 .topbar__icon-btn{
-    width:38px;height:38px;border:1px solid #E2E8F0;
-    background:#fff;border-radius:10px;
-    display:flex;align-items:center;justify-content:center;
-    cursor:pointer;transition:background .18s,transform .15s;
+    width:38px;height:38px;
+    border:1px solid #E2E8F0;background:#fff;
+    border-radius:10px;display:flex;
+    align-items:center;justify-content:center;
+    cursor:pointer;transition:background .18s;
 }
 .topbar__icon-btn:hover{background:#F1F5F9;}
 .topbar__icon-btn:active{background:#E2E8F0;transform:scale(.93);}
-.notif-dot{
-    position:absolute;top:7px;right:7px;
-    width:8px;height:8px;border-radius:50%;
-    background:#EF4444;border:1.5px solid #fff;
-}
-
-/* ── ACTION BAR ── */
-.action-bar{
-    display:flex;align-items:center;justify-content:space-between;gap:1rem;
-    flex-wrap:wrap;
-}
-.filter-tabs{display:flex;gap:.35rem;background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:.3rem;}
-.filter-tab{
-    padding:.38rem .9rem;border-radius:7px;border:none;
-    background:transparent;font-size:.8rem;font-weight:500;color:#64748B;
-    cursor:pointer;font-family:inherit;transition:background .18s,color .18s;
-}
-.filter-tab:hover{background:#F1F5F9;color:#0F172A;}
-.filter-tab--active{background:#EFF6FF;color:#2563EB;font-weight:600;}
-.action-bar__right{display:flex;align-items:center;gap:.6rem;}
-.semester-select{
-    display:flex;align-items:center;gap:.4rem;
-    padding:.45rem .9rem;border-radius:10px;
-    border:1px solid #E2E8F0;background:#fff;
-    font-size:.8rem;font-weight:500;color:#475569;
-    cursor:pointer;transition:border-color .18s;
-}
-.semester-select:hover{border-color:#2563EB;}
-.btn-tambah-kelas{
-    display:flex;align-items:center;gap:.45rem;
-    padding:.5rem 1.1rem;border-radius:10px;
-    background:#2563EB;color:#fff;border:none;
-    font-size:.83rem;font-weight:600;font-family:inherit;
-    cursor:pointer;transition:background .18s,transform .15s,box-shadow .18s;
-}
-.btn-tambah-kelas:hover{background:#1d4ed8;box-shadow:0 4px 14px rgba(37,99,235,.3);transform:translateY(-1px);}
-.btn-tambah-kelas:active{transform:scale(.96);background:#1e40af;}
-
-/* ── KELAS GRID ── */
-.kelas-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:1.1rem;
-}
-
-.kelas-card{
-    background:#fff;border:1px solid #E2E8F0;
-    border-radius:16px;overflow:hidden;
-    display:flex;flex-direction:column;
-    transition:box-shadow .22s,transform .22s,border-color .22s;
-    animation: fadeInUp .35s ease both;
-}
-.kelas-card:hover{
-    box-shadow:0 8px 28px rgba(37,99,235,.12);
-    transform:translateY(-3px);
-    border-color:#BFDBFE;
-}
-
-@keyframes fadeInUp{
-    from{opacity:0;transform:translateY(16px);}
-    to{opacity:1;transform:translateY(0);}
-}
-.kelas-card:nth-child(1){animation-delay:.05s;}
-.kelas-card:nth-child(2){animation-delay:.12s;}
-.kelas-card:nth-child(3){animation-delay:.19s;}
-
-/* Thumbnails */
-.kelas-card__thumb{
-    height:130px;position:relative;
-    display:flex;align-items:flex-end;justify-content:flex-end;
-    padding:.7rem;
-}
-.kelas-card__thumb--1{background:linear-gradient(135deg,#1e3a5f 0%,#2d6a9f 60%,#4a90c4 100%);}
-.kelas-card__thumb--2{background:linear-gradient(135deg,#1a3a4a 0%,#2a6080 60%,#3d8fb5 100%);}
-.kelas-card__thumb--3{background:linear-gradient(135deg,#1f2d3d 0%,#2c3e50 60%,#4a6278 100%);}
-
-/* Status badge */
-.kelas-status{
-    font-size:.68rem;font-weight:700;
-    padding:.22rem .65rem;border-radius:99px;
-}
-.kelas-status--aktif{background:rgba(255,255,255,.9);color:#15803D;}
-.kelas-status--draft{background:rgba(255,255,255,.9);color:#64748B;}
-
-/* Card body */
-.kelas-card__body{
-    padding:1rem 1.1rem 1rem;
-    display:flex;flex-direction:column;gap:.45rem;flex:1;
-}
-.kelas-code{
-    font-size:.7rem;font-weight:700;color:#2563EB;
-    background:#EFF6FF;padding:.18rem .55rem;border-radius:6px;
-    width:fit-content;
-}
-.kelas-name{font-size:1rem;font-weight:700;color:#0F172A;}
-.kelas-desc{font-size:.78rem;color:#64748B;line-height:1.5;}
-.kelas-meta{display:flex;flex-direction:column;gap:.3rem;margin-top:.1rem;}
-.kelas-meta__item{
-    display:flex;align-items:center;gap:.35rem;
-    font-size:.75rem;color:#64748B;
-}
-.kelas-meta__item--empty{color:#CBD5E1;}
-
-/* Footer card */
-.kelas-card__foot{
-    display:flex;align-items:center;justify-content:space-between;
-    margin-top:.5rem;padding-top:.75rem;
-    border-top:1px solid #F1F5F9;
-}
-.kelas-avatars{display:flex;align-items:center;}
-.kelas-avatar{
-    width:26px;height:26px;border-radius:50%;
-    background:#DBEAFE;color:#1D4ED8;
-    font-size:.65rem;font-weight:700;
-    display:flex;align-items:center;justify-content:center;
-    border:2px solid #fff;margin-left:-6px;
-}
-.kelas-avatar:first-child{margin-left:0;}
-.kelas-avatar--more{background:#F1F5F9;color:#64748B;}
-
-.btn-lihat-detail{
-    font-size:.78rem;font-weight:600;color:#2563EB;
-    text-decoration:none;padding:.38rem .8rem;
-    border-radius:8px;border:1.5px solid #DBEAFE;
-    background:#EFF6FF;
-    transition:background .18s,border-color .18s,transform .15s;
-}
-.btn-lihat-detail:hover{background:#DBEAFE;border-color:#93C5FD;transform:translateY(-1px);}
-.btn-lihat-detail:active{transform:scale(.96);}
-
-.btn-tambah-mhs{
-    width:30px;height:30px;border-radius:8px;
-    border:1.5px solid #DBEAFE;background:#EFF6FF;
-    display:flex;align-items:center;justify-content:center;
-    cursor:pointer;transition:background .18s,transform .15s;
-}
-.btn-tambah-mhs:hover{background:#DBEAFE;transform:scale(1.08);}
-
-.btn-edit-draf{
-    font-size:.78rem;font-weight:600;color:#475569;
-    text-decoration:none;padding:.38rem .8rem;
-    border-radius:8px;border:1.5px solid #E2E8F0;
-    background:#fff;
-    transition:color .18s,border-color .18s,transform .15s;
-}
-.btn-edit-draf:hover{color:#2563EB;border-color:#2563EB;transform:translateY(-1px);}
-.btn-edit-draf:active{transform:scale(.96);}
-
-/* ── EMPTY STATE ── */
-.empty-state{
-    display:flex;flex-direction:column;align-items:center;
-    gap:.75rem;padding:3rem;color:#94A3B8;
-}
-.empty-state__text{font-size:.9rem;font-weight:500;}
-
 .hamburger{
     display:none;align-items:center;justify-content:center;
     width:38px;height:38px;border-radius:10px;
     border:1px solid #E2E8F0;background:#fff;
-    cursor:pointer;flex-shrink:0;
-    transition:background .18s;
+    cursor:pointer;flex-shrink:0;transition:background .18s;
 }
 .hamburger:hover{background:#F1F5F9;}
+
+/* ── ALERT ── */
+.alert-success{
+    background:#ECFDF5;border:1px solid #6EE7B7;
+    border-radius:10px;padding:.65rem 1rem;
+    color:#065F46;font-size:.83rem;
+}
+
+/* ── ACTION BAR ── */
+.action-bar{
+    display:flex;align-items:center;
+    justify-content:space-between;gap:1rem;
+}
+.section__title{font-size:1rem;font-weight:700;color:#0F172A;}
+.search-box-kelas{
+    display:flex;align-items:center;gap:.5rem;
+    background:#fff;border:1px solid #E2E8F0;
+    border-radius:10px;padding:.5rem .9rem;
+    width:220px;transition:border-color .18s,box-shadow .18s;
+}
+.search-box-kelas:focus-within{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.10);}
+.search-box-kelas input{
+    border:none;outline:none;
+    font-size:.83rem;color:#0F172A;
+    font-family:inherit;width:100%;background:transparent;
+}
+.search-box-kelas input::placeholder{color:#94A3B8;}
+.btn-tambah-kelas{
+    padding:.55rem 1.1rem;background:#2563EB;color:#fff;
+    border:none;border-radius:10px;font-size:.83rem;
+    font-weight:600;cursor:pointer;font-family:inherit;
+    transition:background .18s,transform .15s,box-shadow .18s;
+    white-space:nowrap;
+}
+.btn-tambah-kelas:hover{background:#1d4ed8;box-shadow:0 4px 14px rgba(37,99,235,.3);transform:translateY(-1px);}
+.btn-tambah-kelas:active{transform:scale(.96);background:#1e40af;}
+
+/* ── TABLE ── */
+.table-wrap{overflow-x:auto;}
+.kelas-table{
+    width:100%;border-collapse:collapse;
+    font-size:.85rem;background:#fff;
+    border-radius:16px;overflow:hidden;
+    border:1px solid #E2E8F0;
+}
+.kelas-table thead tr{background:#F8FAFC;border-bottom:1px solid #E2E8F0;}
+.kelas-table th{
+    padding:.75rem 1rem;text-align:left;
+    font-weight:600;color:#475569;
+    font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;
+}
+.kelas-table td{
+    padding:.85rem 1rem;color:#0F172A;
+    border-bottom:1px solid #F1F5F9;vertical-align:middle;
+}
+.kelas-table tbody tr:last-child td{border-bottom:none;}
+.kelas-table tbody tr{transition:background .18s;}
+.kelas-table tbody tr:hover{background:#F8FAFC;}
+.badge-kode{
+    background:#EFF6FF;color:#1D4ED8;
+    padding:.2rem .65rem;border-radius:99px;
+    font-size:.72rem;font-weight:600;font-family:monospace;
+}
+.badge-status{padding:.2rem .65rem;border-radius:99px;font-size:.72rem;font-weight:600;}
+.badge-aktif{background:#DCFCE7;color:#15803D;}
+.badge-draf{background:#FFF7ED;color:#92400E;}
+.badge-selesai{background:#F1F5F9;color:#475569;}
+.aksi-col{white-space:nowrap;}
+.btn-edit{
+    padding:.35rem .85rem;border:1.5px solid #BFDBFE;
+    background:#EFF6FF;color:#1D4ED8;border-radius:8px;
+    font-size:.75rem;font-weight:600;cursor:pointer;
+    margin-right:.35rem;transition:all .15s;font-family:inherit;
+}
+.btn-edit:hover{background:#DBEAFE;border-color:#93C5FD;transform:translateY(-1px);}
+.btn-edit:active{transform:scale(.96);}
+.btn-hapus{
+    padding:.35rem .85rem;border:1.5px solid #FECACA;
+    background:#FEF2F2;color:#DC2626;border-radius:8px;
+    font-size:.75rem;font-weight:600;cursor:pointer;
+    transition:all .15s;font-family:inherit;
+}
+.btn-hapus:hover{background:#FEE2E2;border-color:#FCA5A5;transform:translateY(-1px);}
+.btn-hapus:active{transform:scale(.96);}
+
+/* ── MODAL ── */
+.modal-overlay{
+    display:none;position:fixed;inset:0;
+    background:rgba(15,23,42,.45);z-index:100;
+    align-items:center;justify-content:center;padding:1.25rem;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+    background:#fff;border-radius:16px;
+    width:100%;max-width:520px;
+    box-shadow:0 8px 32px rgba(0,0,0,.16);
+    animation:slideUp .2s ease;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.modal__header{
+    display:flex;align-items:center;
+    justify-content:space-between;
+    padding:1.25rem 1.5rem 0;
+}
+.modal__title{font-size:1rem;font-weight:700;color:#0F172A;}
+.modal__close{
+    background:none;border:none;font-size:1rem;
+    cursor:pointer;color:#94A3B8;padding:.25rem;
+    border-radius:6px;transition:color .15s;
+}
+.modal__close:hover{color:#0F172A;}
+.modal__body{padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.9rem;}
+.modal__footer{
+    padding:0 1.5rem 1.25rem;
+    display:flex;justify-content:flex-end;gap:.6rem;
+}
+.form-group{display:flex;flex-direction:column;gap:.3rem;}
+.form-group label{font-size:.8rem;font-weight:600;color:#374151;}
+.form-group input,.form-group select,.form-group textarea{
+    padding:.55rem .85rem;border:1px solid #E2E8F0;
+    border-radius:9px;font-size:.85rem;color:#0F172A;
+    outline:none;font-family:inherit;
+    transition:border-color .18s,box-shadow .18s;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+    border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.10);
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.btn-batal{
+    padding:.55rem 1.1rem;border:1.5px solid #E2E8F0;
+    background:#fff;color:#475569;border-radius:9px;
+    font-size:.83rem;font-weight:600;cursor:pointer;
+    font-family:inherit;transition:all .15s;
+}
+.btn-batal:hover{background:#F8FAFC;border-color:#CBD5E1;}
+.btn-simpan{
+    padding:.55rem 1.1rem;background:#2563EB;
+    color:#fff;border:none;border-radius:9px;
+    font-size:.83rem;font-weight:600;cursor:pointer;
+    font-family:inherit;transition:background .18s;
+}
+.btn-simpan:hover{background:#1d4ed8;}
+
+/* ── SIDEBAR OVERLAY ── */
 .sidebar-overlay{display:none;}
 
-/* ── RESPONSIVE ── */
-@media(max-width:1100px){
-    .kelas-grid{grid-template-columns:repeat(2,1fr);}
-}
 @media(max-width:900px){
     .hamburger{display:flex;}
     .sidebar{
@@ -476,64 +490,19 @@
         transition:opacity .28s;opacity:0;
     }
     .sidebar-overlay.overlay--show{display:block;opacity:1;}
-    .bottom-grid{grid-template-columns:1fr;}
-    .stats-grid{grid-template-columns:1fr 1fr;}
-    .search-box{display:none;}
-    .search-box.search-box--open{
-        display:flex;
-        position:fixed;top:12px;left:50%;transform:translateX(-50%);
-        width:calc(100vw - 2rem);max-width:420px;
-        z-index:300;box-shadow:0 4px 20px rgba(15,23,42,.15);
-    }
-    .search-box.search-box--open .search-box__close{display:flex;}
-    .search-toggle{display:flex;}
+    .dash-main{padding:1rem;}
+    .action-bar{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:560px){
     .dash-main{padding:1rem;}
-    .action-bar{flex-direction:column;align-items:flex-start;}
 }
 </style>
 
 <script>
-// ── Filter tab ──
-document.querySelectorAll('.filter-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('filter-tab--active'));
-        tab.classList.add('filter-tab--active');
-        filterKelas();
-    });
-});
-
-// ── Search ──
-document.getElementById('searchKelas').addEventListener('input', filterKelas);
-
-function filterKelas() {
-    const activeFilter = document.querySelector('.filter-tab--active').dataset.filter;
-    const keyword = document.getElementById('searchKelas').value.toLowerCase();
-    const cards = document.querySelectorAll('.kelas-card');
-    let visible = 0;
-
-    cards.forEach(card => {
-        const statusMatch = activeFilter === 'semua' || card.dataset.status === activeFilter;
-        const nameMatch   = card.dataset.nama.includes(keyword) ||
-                            card.querySelector('.kelas-name').textContent.toLowerCase().includes(keyword);
-        if (statusMatch && nameMatch) {
-            card.style.display = '';
-            visible++;
-        } else {
-            card.style.display = 'none';
-        }
-    });
-
-    document.getElementById('emptyState').style.display = visible === 0 ? 'flex' : 'none';
-}
-</script>
-
-<script>
-const sidebar = document.querySelector('.sidebar');
-const overlay = document.getElementById('sidebarOverlay');
-const hamburger = document.getElementById('hamburgerBtn');
-
+// ── SIDEBAR / HAMBURGER ──
+const sidebar  = document.querySelector('.sidebar');
+const overlay  = document.getElementById('sidebarOverlay');
+const hamburger= document.getElementById('hamburgerBtn');
 hamburger.addEventListener('click', () => {
     sidebar.classList.add('sidebar--open');
     overlay.classList.add('overlay--show');
@@ -542,7 +511,6 @@ overlay.addEventListener('click', () => {
     sidebar.classList.remove('sidebar--open');
     overlay.classList.remove('overlay--show');
 });
-// Tutup drawer saat klik link sidebar
 document.querySelectorAll('.sidebar__link').forEach(link => {
     link.addEventListener('click', () => {
         sidebar.classList.remove('sidebar--open');
@@ -550,19 +518,38 @@ document.querySelectorAll('.sidebar__link').forEach(link => {
     });
 });
 
-const searchBox = document.getElementById('searchBox');
-const searchToggle = document.getElementById('searchToggle');
-const searchClose = document.getElementById('searchClose');
-const searchKelas = document.getElementById('searchKelas');
+// ── MODAL ──
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(el => {
+    el.addEventListener('click', e => { if(e.target===el) closeModal(el.id); });
+});
 
-searchToggle.addEventListener('click', () => {
-    searchBox.classList.add('search-box--open');
-    searchKelas.focus();
+// ── EDIT ──
+function openEdit(id, nama, mapel, kode, desk, kap, status) {
+    document.getElementById('formEdit').action = '/dashboard/kelas/' + id;
+    document.getElementById('e_nama').value   = nama;
+    document.getElementById('e_mapel').value  = mapel;
+    document.getElementById('e_kode').value   = kode;
+    document.getElementById('e_desk').value   = desk;
+    document.getElementById('e_kap').value    = kap;
+    document.getElementById('e_status').value = status;
+    openModal('modalEdit');
+}
+
+// ── SEARCH ──
+document.getElementById('searchKelas').addEventListener('input', function(){
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('.kelas-row').forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
 });
-searchClose.addEventListener('click', () => {
-    searchBox.classList.remove('search-box--open');
-    searchKelas.value = '';
-    filterKelas();
-});
+
+// ── FLASH AUTO HIDE ──
+setTimeout(() => {
+    const f = document.getElementById('flashMsg');
+    if(f) f.style.transition='opacity .5s', f.style.opacity='0', setTimeout(()=>f.remove(),500);
+}, 3000);
 </script>
+
 @endsection

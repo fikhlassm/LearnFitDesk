@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\KelasController;
 
 // Landing page (halaman utama sebelum login)
 Route::get('/', function () {
@@ -39,9 +40,13 @@ Route::get('/dashboard/pengajar', function () {
     return view('dashboard.pengajar');
 })->middleware('auth')->name('dashboard.pengajar');
 
-Route::get('/dashboard/kelas', function () {
-    return view('dashboard.kelas-saya');
-})->middleware('auth')->name('dashboard.kelas');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard/kelas',          [KelasController::class, 'index'])->name('dashboard.kelas');
+    Route::post('/dashboard/kelas',         [KelasController::class, 'store'])->name('kelas.store');
+    Route::get('/dashboard/kelas/{id}',     [KelasController::class, 'edit'])->name('kelas.edit');
+    Route::put('/dashboard/kelas/{id}',     [KelasController::class, 'update'])->name('kelas.update');
+    Route::delete('/dashboard/kelas/{id}',  [KelasController::class, 'destroy'])->name('kelas.destroy');
+});
 
 // Dashboard Siswa
 Route::get('/dashboard/siswa', function () {
