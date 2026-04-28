@@ -585,6 +585,7 @@ body.js-loaded [data-animate].visible { opacity: 1; transform: translate(0,0); }
     box-shadow: 0 8px 40px rgba(37,99,235,.1);
     position: relative;
     z-index: 2;
+    margin-inline: auto;      /* ← tambahkan ini untuk centering */
 }
 
 .auth-card__header { margin-bottom: 28px; }
@@ -760,7 +761,7 @@ body.js-loaded [data-animate].visible { opacity: 1; transform: translate(0,0); }
 
 /* Responsive */
 @media (max-width: 540px) {
-    .auth-card { padding: 28px 20px 24px; border-radius: 16px; margin-inline: 16px; }
+    .auth-card { padding: 28px 20px 24px; border-radius: 16px; margin-inline: 16px; width: calc(100% - 32px); }
     .auth-card__title { font-size: 1.5rem; }
 }
 .alert--success {
